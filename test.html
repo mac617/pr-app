@@ -1,0 +1,18 @@
+<body>
+  <button id="btn">点击</button>
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  let btn = document.getElementById("btn");
+  btn.onclick = function() {
+    axios
+      .get("http://www.57mh.com", {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        }
+      })
+      .then(function(res) {
+        document.write(res);
+      });
+  };
+</script>
