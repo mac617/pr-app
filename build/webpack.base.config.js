@@ -28,7 +28,7 @@ module.exports = {
             loader: "url-loader",
             options: {
               limit: 10000,
-              name: "images/[name].[hash:7].[ext]" // 将图片都放入 images 文件夹下，[hash:7]防缓存
+              name: "css/images/[name].[hash:7].[ext]" // 将图片都放入 images 文件夹下，[hash:7]防缓存
             }
           }
         ]
@@ -40,7 +40,7 @@ module.exports = {
             loader: "url-loader",
             options: {
               limit: 10000,
-              name: "fonts/[name].[hash:7].[ext]" // 将字体放入 fonts 文件夹下
+              name: "css/fonts/[name].[hash:7].[ext]" // 将字体放入 fonts 文件夹下
             }
           }
         ]

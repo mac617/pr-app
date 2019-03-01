@@ -107,13 +107,13 @@
       </VBtn>-->
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn flat @click="toHome()">
-          <VIcon>home</VIcon>首页
+          <v-icon>home</v-icon>首页
         </v-btn>
         <v-btn flat @click="toHistory()">
-          <VIcon>history</VIcon>收藏/历史
+          <v-icon>history</v-icon>收藏/历史
         </v-btn>
         <v-btn flat @click="toCategory()">
-          <VIcon>category</VIcon>分区
+          <v-icon>category</v-icon>分区
         </v-btn>
       </v-toolbar-items>
       <v-menu :nudge-width="100" class="hidden-md-and-up">
@@ -123,13 +123,17 @@
         </v-toolbar-title>
 
         <v-list>
+      
           <v-list-tile @click="toHome()">
+            <v-icon>home</v-icon>
             <v-list-tile-title>首页</v-list-tile-title>
           </v-list-tile>
           <v-list-tile @click="toHistory()">
+            <v-icon>history</v-icon>
             <v-list-tile-title>收藏/历史</v-list-tile-title>
           </v-list-tile>
           <v-list-tile @click="toCategory()">
+            <v-icon>category</v-icon>
             <v-list-tile-title>分区</v-list-tile-title>
           </v-list-tile>
         </v-list>
