@@ -4,36 +4,44 @@
     <!-- <NavBar v-on:sendUser="msgFromNavBar"/> -->
     <ComicDetail v-bind:comicDetail="comicDetail"/>
     <v-layout justify-center>
-      <v-flex lg12 md12 xs12>
-        <v-tabs slot="extension" v-model="model" grow icons-and-text>
-          <v-tab :href="`#tab-` + 1">简介
-            <v-icon>phone</v-icon>
-          </v-tab>
-          <v-tab :href="`#tab-` + 2">章节
-            <v-icon>favorite</v-icon>
-          </v-tab>
-          <v-tab :href="`#tab-` + 3">Nearby
+      <v-flex>
+        <v-card>
+          <v-flex lg12 md12 xs12>
+            <v-tabs slot="extension" v-model="model" grow icons-and-text>
+              <v-tab :href="`#tab-` + 1">简介
+                <v-icon>details</v-icon>
+              </v-tab>
+              <v-tab :href="`#tab-` + 2">章节
+                <v-icon>library_books</v-icon>
+              </v-tab>
+              <!-- <v-tab :href="`#tab-` + 3">Nearby
             <v-icon>account_box</v-icon>
-          </v-tab>
-        </v-tabs>
+              </v-tab>-->
+            </v-tabs>
 
-        <v-tabs-items v-model="model" touchless>
-          <v-tab-item :value="'tab-' + 1">
-            <v-card flat>
-              <v-card-text>{{bookIntro}}</v-card-text>
-            </v-card>
-          </v-tab-item>
-          <v-tab-item :value="'tab-' + 2">
-            <v-card flat>
-              <ChapterList v-bind:chapterList="chapterList"/>
-            </v-card>
-          </v-tab-item>
-          <v-tab-item :value="'tab-' + 3">
+            <v-tabs-items v-model="model" touchless>
+              <v-tab-item :value="'tab-' + 1">
+                <v-card flat>
+                  <v-card-text>
+                    <div>
+                      <p>{{"&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"+bookIntro}}</p>
+                    </div>
+                  </v-card-text>
+                </v-card>
+              </v-tab-item>
+              <v-tab-item :value="'tab-' + 2">
+                <v-card flat>
+                  <ChapterList v-bind:chapterList="chapterList"/>
+                </v-card>
+              </v-tab-item>
+              <!-- <v-tab-item :value="'tab-' + 3">
             <v-card flat>
               <v-card-text>3</v-card-text>
             </v-card>
-          </v-tab-item>
-        </v-tabs-items>
+              </v-tab-item>-->
+            </v-tabs-items>
+          </v-flex>
+        </v-card>
       </v-flex>
     </v-layout>
   </div>
@@ -42,7 +50,6 @@
 <script>
 import NavBar from "@/navBar.vue";
 import ChapterList from "@/chapterList.vue";
-import ComicTab from "@/comicTab.vue";
 import ComicDetail from "@/comicDetail.vue";
 
 export default {
@@ -50,7 +57,6 @@ export default {
     // SearchList,
     NavBar,
     ChapterList,
-    ComicTab,
     ComicDetail
   },
   data() {
@@ -108,10 +114,12 @@ export default {
   async created() {
     // console.log("会加载")
     this.$store.state.comicDetail = "";
+    this.$store.state.dataLoading = true;
     let data = await this.$spider({
       url: "/api" + this.$route.params.bookUrl + "/",
       type: "comic"
     });
+    this.$store.state.dataLoading = false;
     // console.log(this.$route.params.bookUrl);
     this.comicDetail = data.comicDetail;
     console.log("data" + data.comicDetail);
@@ -201,7 +209,7 @@ export default {
   position: fixed !important;
   bottom: 0px;
 } */
-.v-window {
+/* .v-window {
   margin-bottom: 48px;
-}
+} */
 </style>

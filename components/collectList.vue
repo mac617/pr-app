@@ -10,9 +10,17 @@
     <v-layout justify-center ma-0>
       <v-flex lg12>
         <v-container fluid grid-list-lg>
-          <v-layout row wrap justify-center>
-            <v-flex lg6 md6 sm8 xs12 v-for="item in collectList" :key="item.id" @click="toComic(item)">
-              <v-card class="black--text">
+          <v-layout row wrap :justify-center="$vuetify.breakpoint.smOnly">
+            <v-flex
+              lg6
+              md6
+              sm8
+              xs12
+              v-for="item in collectList"
+              :key="item.id"
+              @click="toComic(item)"
+            >
+              <v-card>
                 <v-layout>
                   <v-flex xs5 align-self-center>
                     <v-img :src="item.comicDetail.bookImg" height="125px" contain></v-img>
@@ -25,8 +33,11 @@
                         <div>{{item.comicDetail.bookAuthor}}</div>
                         <!-- <div>{{ item.comicDetail.bookYear }}</div> -->
                         <!-- <div>{{ item.comicDetail.bookCountry }}</div> -->
-                        <div>更新至 : {{ item.comicDetail.bookUpdataNum }}</div>
-                        <div>更新时间 : {{ item.comicDetail.bookUpdateTime }}</div>
+                        <span>更新至 : {{ item.comicDetail.bookUpdataNum }}</span>
+                        <div style="overflow:hidden">
+                          <div style="float:left">更新时间 :&nbsp</div>
+                          <div style="float:left">{{ item.comicDetail.bookUpdateTime }}</div>
+                        </div>
                       </div>
                     </v-card-title>
                   </v-flex>
@@ -34,6 +45,7 @@
                 <v-divider light></v-divider>
               </v-card>
             </v-flex>
+            <!-- <v-spacer></v-spacer> -->
           </v-layout>
         </v-container>
       </v-flex>
@@ -81,7 +93,7 @@ export default {
       );
       if (status === 200 && data && data.code === 0) {
         if (data.results[0]) {
-          this.collectList = data.results[0].collect;
+          this.collectList = data.results[0].collect.reverse();
           console.log(this.collectList);
         }
       }

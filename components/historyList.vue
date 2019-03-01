@@ -31,22 +31,29 @@
     </v-container>
     </v-card></v-flex>
     </v-layout>-->
-    <v-layout justify-center>
+    <v-layout justify-center ma-0>
       <v-flex>
-        <v-container fluid grid-list-md>
-          <v-layout row wrap justify-center>
+        <v-container fluid grid-list-lg>
+          <v-layout row wrap :justify-center="$vuetify.breakpoint.smOnly">
             <v-flex lg6 md6 sm8 xs12 v-for="item in history" :key="item.id">
-              <v-card class="black--text">
+              <v-card>
                 <v-layout @click="toComic(item)">
-                  <v-flex xs5>
+                  <v-flex xs5 align-self-center>
                     <v-img :src="item.comicDetail.bookImg" height="125px" contain></v-img>
                   </v-flex>
                   <v-flex xs7>
                     <v-card-title primary-title>
                       <div class="text-truncate">
                         <span class="headline">{{ item.item.bookTitle}}</span>
-                        <div>Foster the People</div>
-                        <div>(2014)</div>
+                        <div class="body-2">({{ item.comicDetail.bookStatus }})</div>
+                        <div>{{item.comicDetail.bookAuthor}}</div>
+                        <!-- <div>{{ item.comicDetail.bookYear }}</div> -->
+                        <!-- <div>{{ item.comicDetail.bookCountry }}</div> -->
+                        <span>更新至 : {{ item.comicDetail.bookUpdataNum }}</span>
+                        <div style="overflow:hidden">
+                          <div style="float:left">更新时间 :&nbsp</div>
+                          <div style="float:left">{{ item.comicDetail.bookUpdateTime }}</div>
+                        </div>
                       </div>
                     </v-card-title>
                     <!-- <v-card-title primary-title>
@@ -62,7 +69,12 @@
                 <v-card-actions class="pa-3">
                   <span>{{item.item.readTime}}</span>
                   <v-spacer></v-spacer>
-                  <v-btn block class="maxWidth" @click="toComicView(item)">
+                  <v-btn
+                    block
+                    class="maxWidth white--text"
+                    color="#424242"
+                    @click="toComicView(item)"
+                  >
                     <div class="text-truncate">
                       <span>续看{{item.item.chapterName}}</span>
                     </div>
@@ -70,7 +82,7 @@
                 </v-card-actions>
               </v-card>
             </v-flex>
-            <v-spacer></v-spacer>
+            <!-- <v-spacer></v-spacer> -->
           </v-layout>
         </v-container>
       </v-flex>
@@ -100,7 +112,7 @@ export default {
     // this.history = storage.getItem("history");
     // if (storage.getItem("history")) {
     //   this.history = JSON.parse(storage.getItem("history"));
-    this.history = JSON.parse(storage.getItem("history"));
+    this.history = JSON.parse(storage.getItem("history")).reverse();
     console.log(this.history);
     // this.history.reverse();
     // this.history = storage.getItem("history");
@@ -163,7 +175,7 @@ export default {
 }
 
 .maxWidth {
-  max-width: 70px !important;
+  min-width: 90px !important;
 }
 /* .divWidth{
   width:100%;

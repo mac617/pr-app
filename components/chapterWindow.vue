@@ -44,20 +44,20 @@
 export default {
   data() {
     return {
-      items: [
-        {
-          src: '../../assets/imgs/4205.jpg'
-        },
-        {
-          src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg'
-        },
-        {
-          src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg'
-        },
-        {
-          src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg'
-        }
-      ]
+      // items: [
+      //   {
+      //     src: '../../assets/imgs/4205.jpg'
+      //   },
+      //   {
+      //     src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg'
+      //   },
+      //   {
+      //     src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg'
+      //   },
+      //   {
+      //     src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg'
+      //   }
+      // ]
     }
   }
 }

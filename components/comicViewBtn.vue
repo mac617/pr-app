@@ -1,6 +1,7 @@
 <template>
   <v-speed-dial
     v-model="$store.state.fab"
+    v-if="this.$store.state.comicViewBtnFlag"
     fixed
     :top="top"
     :bottom="bottom"
@@ -9,6 +10,7 @@
     :direction="direction"
     :transition="transition"
   >
+    <!-- {{newHistory}} -->
     <v-btn
       slot="activator"
       v-model="$store.state.fab"
@@ -61,18 +63,28 @@
       </v-dialog>
     </v-layout>
     <div class="hidden-xs-and-up">
-      <!-- <v-btn fab dark :small="this.$vuetify.breakpoint.smAndDown" @click="toHome()">
+      <v-btn fab dark :small="this.$vuetify.breakpoint.smAndDown" @click="toHome()">
         <v-icon dark>home</v-icon>
       </v-btn>
-      <v-btn fab dark :small="this.$vuetify.breakpoint.smAndDown">
-        <v-icon v-if="checkCollectList" @click.stop="delCollect()" left color="pink">favorite</v-icon>
-        <v-icon
-          v-else-if="!checkCollectList"
-          @click.stop="addCollect();loader = 'loading3'"
-          left
-          color="white"
-        >favorite</v-icon>
-      </v-btn> -->
+      <v-btn
+        v-if="checkCollectList"
+        @click.stop="delCollect()"
+        fab
+        dark
+        :small="this.$vuetify.breakpoint.smAndDown"
+      >
+        <v-icon color="pink">favorite</v-icon>
+      </v-btn>
+
+      <v-btn
+        v-else-if="!checkCollectList"
+        @click.stop="addCollect()"
+        fab
+        dark
+        :small="this.$vuetify.breakpoint.smAndDown"
+      >
+        <v-icon color="white">favorite</v-icon>
+      </v-btn>
       <!-- <v-btn fab dark :small="this.$vuetify.breakpoint.smAndDown">
         <v-icon dark>vertical_align_top</v-icon>
       </v-btn>-->
@@ -125,11 +137,13 @@
 import ChapterList from "@/chapterList.vue";
 import Scroll from "@/scroll.vue";
 export default {
+  props: ["newHistory"],
   components: {
     ChapterList,
     Scroll
   },
   created() {
+    // console.log(this.newHistory);
     this.$store.state.chapterBtnDialog = false;
   },
   data: () => ({
@@ -147,7 +161,16 @@ export default {
     notifications: false,
     sound: true,
     widgets: false,
-    transition: "slide-y-reverse-transition"
+    transition: "slide-y-reverse-transition",
+    bookAuthor: "",
+    bookImg: "",
+    bookTitle: "",
+    bookYear: "",
+    bookStatus: "",
+    bookUpdataNum: "",
+    bookUpdateTime: "",
+    bookCountry: "",
+    collectList: ""
   }),
   // watch: {
   //   username: function() {
@@ -158,14 +181,14 @@ export default {
     // fab: function(){
     //   return this.$store.state.fab
     // },
-    // username: function() {
-    //   return this.$store.state.user;
-    // },
-    // checkCollectList: function() {
-    //   return JSON.stringify(this.collectList).includes(
-    //     this.$route.params.bookUrl
-    //   );
-    // },
+    checkCollectList: function() {
+      return JSON.stringify(this.collectList).includes(
+        this.$route.params.comicNo
+      );
+    },
+    username: function() {
+      return this.$store.state.user;
+    },
     dialog: function() {
       return this.$store.state.chapterBtnDialog;
     },
@@ -197,60 +220,98 @@ export default {
       this.right = !val;
     }
   },
+  created() {
+    this.getHistory();
+    this.getCollect();
+  },
   methods: {
-    // getCollect: async function() {
-    //   let username = this.username;
-    //   const { status, data } = await this.$axios.post(
-    //     "/user/users/getCollect",
-    //     {
-    //       username: username
-    //     }
-    //   );
-    //   if (status === 200 && data && data.code === 0) {
-    //     this.collectList = data.results[0].collect;
-    //     console.log("这是collectList" + this.collectList);
-    //   }
-    // },
-    // addCollect: async function() {
-    //   // checkLogin
-    //   if (!this.username.length) {
-    //     this.$router.push("/login");
-    //   }
-    //   let username = this.username;
-    //   let id = this.$route.params.comicNo;
-    //   const { status, data } = await this.$axios.post(
-    //     "/user/users/addCollect",
-    //     {
-    //       username: username,
-    //       id: id,
-    //       comicDetail: {
-    //         bookImg: this.$store.state.comicDetail.bookImg,
-    //         bookTitle: this.$store.state.comicDetail.bookTitle,
-    //         bookStatus: this.$store.state.comicDetail.status,
-    //         bookAuthor: this.$store.state.comicDetail.author,
-    //         bookYear: this.$store.state.comicDetail.year,
-    //         bookCountry: this.$store.state.comicDetail.country,
-    //         bookUpdataNum: this.$store.state.comicDetail.updateNum,
-    //         bookUpdateTime: this.$store.state.comicDetail.updateTime
-    //       }
-    //     }
-    //   );
-    //   // console.log(data)
-    //   if (status === 200 && data && data.code === 0) {
-    //     this.getCollect();
-    //   }
-    // },
-    // delCollect: async function() {
-    //   let username = this.username;
-    //   let id = this.$route.params.bookUrl;
-    //   const { status, data } = await this.$axios.post(
-    //     "/user/users/delCollect",
-    //     { username: username, id: id }
-    //   );
-    //   if (status === 200 && data && data.code === 0) {
-    //     this.getCollect();
-    //   }
-    // },
+    getHistory() {
+      console.log("comicViewWindow");
+      // let localBookTitle = data.bookTitle;
+      // let localChapterName = data.chapterName;
+      // let localImgList = data.comicViewImg;
+      // let localComicLength = data.comicViewFc;
+      let storage = window.localStorage;
+      let content = [];
+      let oldHistory = JSON.parse(storage.getItem("history"));
+      console.log(oldHistory);
+      console.log("老数据" + oldHistory[0]);
+      // console.log("oldHistory" + oldHistory[0].item.id);
+
+      if (oldHistory != null) {
+        for (var i = 0; i < oldHistory.length; i++) {
+          //去除与newHistory重复的数据
+          if (oldHistory[i].item.id == this.$route.params.comicNo) {
+            (this.bookAuthor = oldHistory[i].comicDetail.bookAuthor),
+              (this.bookImg = oldHistory[i].comicDetail.bookImg),
+              (this.bookTitle = oldHistory[i].comicDetail.bookTitle),
+              (this.bookYear = oldHistory[i].comicDetail.bookYear),
+              (this.bookStatus = oldHistory[i].comicDetail.bookStatus),
+              (this.bookUpdataNum = oldHistory[i].comicDetail.bookUpdataNum),
+              (this.bookUpdateTime = oldHistory[i].comicDetail.bookUpdateTime),
+              (this.bookCountry = oldHistory[i].comicDetail.bookCountry);
+          }
+          // console.log(oldHistory[i].item.id);
+        }
+      }
+    },
+    getCollect: async function() {
+      if (!this.username.length) {
+        return false;
+      }
+      let username = this.username;
+
+      const { status, data } = await this.$axios.post(
+        "/user/users/getCollect",
+        {
+          username: username
+        }
+      );
+      if (status === 200 && data && data.code === 0) {
+        this.collectList = data.results[0].collect;
+        console.log("这是collectList" + this.collectList);
+      }
+    },
+    addCollect: async function() {
+      // checkLogin
+      if (!this.username.length) {
+        this.$router.push("/login");
+      }
+      let username = this.username;
+      let id = this.$route.params.comicNo;
+      const { status, data } = await this.$axios.post(
+        "/user/users/addCollect",
+        {
+          username: username,
+          id: id,
+          comicDetail: {
+            bookImg: this.bookImg,
+            bookTitle: this.bookTitle,
+            bookStatus: this.bookStatus,
+            bookAuthor: this.bookAuthor,
+            bookYear: this.bookYear,
+            bookCountry: this.bookCountry,
+            bookUpdataNum: this.bookUpdataNum,
+            bookUpdateTime: this.bookUpdateTime
+          }
+        }
+      );
+      // console.log(data)
+      if (status === 200 && data && data.code === 0) {
+        this.getCollect();
+      }
+    },
+    delCollect: async function() {
+      let username = this.username;
+      let id = this.$route.params.comicNo;
+      const { status, data } = await this.$axios.post(
+        "/user/users/delCollect",
+        { username: username, id: id }
+      );
+      if (status === 200 && data && data.code === 0) {
+        this.getCollect();
+      }
+    },
     toNext() {
       this.$emit("toNext");
     },

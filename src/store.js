@@ -22,7 +22,8 @@ export default new Vuex.Store({
     categoryContent: "",
     loading: false,
     prevLoading:false,
-    nextLoading:false
+    nextLoading:false,
+    dataLoading:false
   },
   mutations: {
     setSearchResult(state, val) {

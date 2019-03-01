@@ -56,6 +56,7 @@ export default {
   },
   methods: {
     getContent: async function() {
+      this.$store.state.dataLoading = true
       let data = await this.$spider({
         url: "/api",
         type: "home"
@@ -64,6 +65,7 @@ export default {
       this.finishContent = data[1];
       this.newContent = data[2];
       this.flag = true;
+      this.$store.state.dataLoading = false
     }
   }
 };

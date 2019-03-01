@@ -10,6 +10,8 @@ import Category from "./views/category.vue";
 import Test2 from "./views/test2.vue";
 import Test3 from "./views/test3.vue";
 import Test from "./views/test.vue";
+import DevLop from './views/devLog.vue'
+import About from './views/about.vue'
 export default {
   // mode: "history",
   routes: [
@@ -50,16 +52,24 @@ export default {
       component: Category
     },
     {
-      path: "/test2",
-      component: Test2
+      path: "/devLop",
+      component: DevLop
     },
     {
-      path: "/test3",
-      component: Test3
-    },
-    {
-      path: "/test",
-      component: Test
+      path: "/about",
+      component: About
     }
+    // {
+    //   path: "/test2",
+    //   component: Test2
+    // },
+    // {
+    //   path: "/test3",
+    //   component: Test3
+    // },
+    // {
+    //   path: "/test",
+    //   component: Test
+    // }
   ]
 };

@@ -56,7 +56,7 @@
     <!-- <v-img :src="require('')" /> -->
     <!-- <v-img :src="require('../assets/imgs/4205.jpg')" /> -->
     <!-- </v-img> -->
-    <div class="countPage">{{ this.num+1 }}/{{ comicLength }}</div>
+    <div class="countPage">{{ this.num+1 }}/{{ this.comicLength }}</div>
     <Scroll>
       <v-flex slot="scrollBtn" xs12 class="text-xs-center" @click="chapterNext">
         <v-alert
@@ -79,9 +79,11 @@
     </Scroll>
     <v-scale-transition>
       <ComicViewBtn
-        v-if="this.$store.state.comicViewBtnFlag"
+        class="move"
+        v-if="this.$store.state.comicViewBtnFlag&&this.newHistory"
         @toNext="chapterNext"
         @toPrev="chapterPrev"
+        :newHistory="this.newHistory"
       />
     </v-scale-transition>
   </div>
@@ -113,7 +115,6 @@ export default {
       //   { url: require('../assets/imgs/4205.jpg') },
       //   { url: require('../assets/imgs/4205.jpg') }
       // ],z
-      bookImg: "",
       lazyNextNum: 0,
       getImgData: "",
       flag: true,
@@ -136,7 +137,16 @@ export default {
             this.$route.params.comicNo +
             this.$route.params.chapterNo
         }
-      ]
+      ],
+      bookAuthor: "",
+      bookImg: "",
+      bookTitle: "",
+      bookYear: "",
+      bookStatus: "",
+      bookUpdataNum: "",
+      bookUpdateTime: "",
+      bookCountry: "",
+      newHistory: ""
       // comicBookTitle:'',
       // comicChapterName:''
     };
@@ -148,14 +158,25 @@ export default {
   //   }
   // },
   computed: {
+    dark: function() {
+      return this.$store.state.dark;
+    },
+    // color:function(){
+    //   if(!this.$store.state.dark) {
+    //     let white1 = document.getElementsByClassName('v-breadcrumbs__item')
+    //     white1.setAttribute('style',"color:#fff !important")
+    //     return 'justify-center'
+    //   } else {
+    //     let black1 = document.getElementsByClassName('v-breadcrumbs__item')
+    //     black1.setAttribute('style',"color:#424242 !important")
+    //     return 'justify-center'
+    //   }
+    // },
     imgList: function() {
       return this.content.comicViewImg || "";
     },
     comicLength: function() {
       return this.content.comicViewFc;
-    },
-    bookTitle: function() {
-      return this.content.bookTitle;
     },
     breadOnOff: function() {
       return this.$route.path.includes("comicview");
@@ -219,6 +240,23 @@ export default {
     // }
   },
   watch: {
+    dark: function() {
+      if (!this.dark) {
+        let white1 = document
+          .getElementsByClassName("v-breadcrumbs__item")[0]
+          .setAttribute("style", "color:#424242 !important");
+        let white2 = document
+          .getElementsByClassName("v-breadcrumbs__item")[1]
+          .setAttribute("style", "color:#424242 !important");
+      } else {
+        let black1 = document
+          .getElementsByClassName("v-breadcrumbs__item")[0]
+          .setAttribute("style", "color:#fff !important");
+        let black2 = document
+          .getElementsByClassName("v-breadcrumbs__item")[1]
+          .setAttribute("style", "color:#fff !important");
+      }
+    },
     $route: async function() {
       this.content = "";
       this.$store.state.page = 7;
@@ -247,8 +285,11 @@ export default {
   },
 
   mounted() {
-    // let imgDom = this.$refs.dataNum
-    // console.log(this.$route);
+    let black1 = document
+      .getElementsByClassName("v-breadcrumbs__item")[0]
+      if(black1) {
+        black1.setAttribute("style", "color:#424242 !important");
+      }
     console.log("这是comicview页面过来的");
     if (this.switch1) {
       window.addEventListener("scroll", this.autoPull);
@@ -270,9 +311,18 @@ export default {
     window.removeEventListener("scroll", this.pull);
     window.removeEventListener("scroll", this.autoPull);
   },
-
+  // beforeCreate() {
+  //   let storage = window.localStorage;
+  //   let oldHistory = JSON.parse(storage.getItem("history"));
+  //   if (!oldHistory) {
+  //     console.log("oldHistory");
+  //     this.$router.push("/");
+  //     return false;
+  //   }
+  // },
   async created() {
-    window.scrollTo(0, 0)
+    this.$store.state.chapterBtnDialog = false;
+    window.scrollTo(0, 0);
     console.log("1");
     let url =
       "/api" +
@@ -281,6 +331,14 @@ export default {
       this.$route.params.chapterNo +
       ".html";
     let data = await this.getImg(url);
+    let black1 = document
+      .getElementsByClassName("v-breadcrumbs__item")[0]
+      .setAttribute("style", "color:#424242 !important");
+    let black2 = document
+      .getElementsByClassName("v-breadcrumbs__item")[1]
+      .setAttribute("style", "color:#424242 !important");
+    // let white2 = document.getElementsByClassName("v-breadcrumbs__item")[1];
+    // white2.setAttribute("style", "color:#424242 !important");
     // this.bookTitle = data.bookTitle;
     // this.chapterName = data.chapterName;
     this.content = data;
@@ -394,7 +452,7 @@ export default {
           console.log("chapter" + chapterNo);
           console.log("listLength" + this.chapterList.length);
           if (this.chapterList.length + 1 == chapterNo) {
-            alert("到底啦");
+            // alert("到底啦");
             return false;
           }
           console.log("chapter2222" + chapterNo);
@@ -409,9 +467,9 @@ export default {
           console.log(data);
           this.setHistory(data);
           for (var i = 0; i < data.comicViewImg.length; i++) {
-            this.imgList.push(data.comicViewImg[i]);
+            this.content.comicViewImg.push(data.comicViewImg[i]);
           }
-          this.comicLength =
+          this.content.comicViewFc =
             Number(this.comicLength) + Number(data.comicViewFc);
           this.flag = true;
         }
@@ -419,12 +477,14 @@ export default {
     },
     async getImg(url) {
       // console.log(this.$route.params.chapterNo);
+      this.$store.state.dataLoading = true;
       let data = await this.$spider({
         url: url,
         type: "comicView"
       });
-      this.$set(this.breads[1],'text',data.bookTitle);
-      this.$set(this.breads[2],'text',data.chapterName);
+      this.$store.state.dataLoading = false;
+      this.$set(this.breads[1], "text", data.bookTitle);
+      this.$set(this.breads[2], "text", data.chapterName);
       // alert(this.bookTitle);
       // console.log("这是data" + data);
       return new Promise(resolve => {
@@ -447,14 +507,14 @@ export default {
         for (var i = 0; i < oldHistory.length; i++) {
           //去除与newHistory重复的数据
           if (oldHistory[i].item.id == this.$route.params.comicNo) {
-            // this.bookAuthor= oldHistory[i].comicDetail.bookImg,
-            this.bookImg = oldHistory[i].comicDetail.bookImg;
-            // this.bookTitle= oldHistory[i].comicDetail.bookImg,
-            // this.bookYear= oldHistory[i].comicDetail.bookImg,
-            // this.bookStatus= oldHistory[i].comicDetail.bookImg,
-            // this.bookUpdataNum= oldHistory[i].comicDetail.bookImg,
-            // this.bookUpdateTime= oldHistory[i].comicDetail.bookImg,
-            // this.bookCountry= oldHistory[i].comicDetail.bookImg,
+            (this.bookAuthor = oldHistory[i].comicDetail.bookAuthor),
+              (this.bookImg = oldHistory[i].comicDetail.bookImg),
+              (this.bookTitle = oldHistory[i].comicDetail.bookTitle),
+              (this.bookYear = oldHistory[i].comicDetail.bookYear),
+              (this.bookStatus = oldHistory[i].comicDetail.bookStatus),
+              (this.bookUpdataNum = oldHistory[i].comicDetail.bookUpdataNum),
+              (this.bookUpdateTime = oldHistory[i].comicDetail.bookUpdateTime),
+              (this.bookCountry = oldHistory[i].comicDetail.bookCountry);
           }
           // console.log(oldHistory[i].item.id);
         }
@@ -487,7 +547,7 @@ export default {
         );
       };
       console.log("时间" + readTime());
-      let newHistory = {
+      this.newHistory = {
         item: {
           id: this.$route.params.comicNo,
           bookTitle: data.bookTitle,
@@ -498,14 +558,14 @@ export default {
           // bookImg: this.comicDetail.bookImg
         },
         comicDetail: {
-          // bookAuthor: this.comicDetail.author,
-          bookImg: this.bookImg
-          // bookTitle: this.comicDetail.bookTitle,
-          // bookYear: this.comicDetail.year,
-          // bookStatus: this.comicDetail.status,
-          // bookUpdataNum: this.comicDetail.updateNum,
-          // bookUpdateTime: this.comicDetail.updateTime,
-          // bookCountry: this.comicDetail.country
+          bookAuthor: this.bookAuthor,
+          bookImg: this.bookImg,
+          bookTitle: this.bookTitle,
+          bookYear: this.bookYear,
+          bookStatus: this.bookStatus,
+          bookUpdataNum: this.bookUpdataNum,
+          bookUpdateTime: this.bookUpdateTime,
+          bookCountry: this.bookCountry
         }
       };
       // console.log(oldHistory)
@@ -513,15 +573,15 @@ export default {
         //遍历oldHistory数组,再把oldHistory Push进去新数组
         for (var i = 0; i < oldHistory.length; i++) {
           //去除与newHistory重复的数据
-          if (oldHistory[i].item.id != newHistory.item.id) {
+          if (oldHistory[i].item.id != this.newHistory.item.id) {
             content.push(oldHistory[i]);
           }
           // console.log(oldHistory[i].item.id);
         }
         //增加newHistory点击的数据
-        content.push(newHistory);
+        content.push(this.newHistory);
       } else {
-        content.push(newHistory);
+        content.push(this.newHistory);
       }
       console.log("content" + content);
       storage.setItem("history", JSON.stringify(content));
@@ -709,5 +769,20 @@ export default {
 
 /* .pr-comicViewWindow{
   margin-top:50px
+} */
+.move {
+  /* right:0rem !important; */
+  bottom: 2rem !important;
+}
+/* .v-breadcrumbs__item {
+  color: black !important;
+} */
+
+/* .white1{
+  color:black !important;
+}
+
+.black1{
+  color:black !important;
 } */
 </style>

@@ -1,30 +1,36 @@
 <template>
-  <div>
-    <v-img src="http://images.lancaier.com/ManHuaKu/X/XingHaoLiuNianYuJianNi/8/1.jpg-zymk.jpg"></v-img>
-    <v-img src="http://images.lancaier.com/ManHuaKu/X/XingHaoLiuNianYuJianNi/8/1.jpg-zymk.jpg"></v-img>
-    <v-img src="http://images.lancaier.com/ManHuaKu/X/XingHaoLiuNianYuJianNi/8/1.jpg-zymk.jpg"></v-img>
-  </div>
+  <v-container fluid class="text-xs-center">
+    <v-layout
+      flex
+      justify-space-between
+      row
+      wrap
+    >
+      <v-flex xs12>
+        <v-btn @click="show = !show">toggle</v-btn>
+      </v-flex>
+
+      <v-flex xs12 class="mt-5">
+        <v-tooltip v-model="show" top>
+          <template #activator="data">
+            <v-btn icon v-on="data.on">
+              <v-icon color="grey lighten-1">shopping_cart</v-icon>
+            </v-btn>
+          </template>
+          <span>Programmatic tooltip</span>
+        </v-tooltip>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
-// offsetTop是图片到内容顶部的距离
-      // document.body.scrollHeight是内容整体的高度
-      // window.screen.availHeight是窗口高度
-      // window.pageYOffset是窗口到内容顶部的距离
-      // if(window.pageYOffset>document.getElementById())
 
 <script>
-export default {
-  created() {
-    window.onscroll = function() {
-      if (
-        document.body.scrollTop + window.screen.availHeight ==
-        document.body.scrollHeight
-      ) {
-        alert("hehe");
+  export default {
+    data () {
+      return {
+        show: false
       }
-    };
+    }
   }
-};
 </script>
-<style lang="css">
-</style>

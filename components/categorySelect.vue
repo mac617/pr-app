@@ -203,10 +203,10 @@ export default {
       ],
       order: { state: "排序", abbr: "order-id" },
       orderList: [
-        { state: "最新发布", abbr: "order-id" },
-        { state: "最近更新", abbr: "order-addtime" },
-        { state: "人气最旺", abbr: "order-hits" },
-        { state: "评分最高", abbr: "order-gold" }
+        { state: "发布", abbr: "order-id" },
+        { state: "更新", abbr: "order-addtime" },
+        { state: "人气", abbr: "order-hits" },
+        { state: "评分", abbr: "order-gold" }
       ]
       // ["全部", "日本", "港台", "欧美", "韩国", "国产", "其它"]
     };
@@ -236,11 +236,13 @@ export default {
   methods: {
     async getContent() {
       let url = this.url;
+      this.$store.state.dataLoading = true;
       // console.log(this.$route.params.chapterNo);
       let data = await this.$spider({
         url: url,
         type: "category"
       });
+      this.$store.state.dataLoading = false;
       // return new Promise(resolve => {
       //   resolve(data);
       // });
@@ -261,10 +263,12 @@ export default {
         this.order.abbr +
         "-p-" +
         this.page;
+      this.$store.state.dataLoading = true;
       let data = await this.$spider({
         url: url,
         type: "category"
       });
+      this.$store.state.dataLoading = false;
       this.content = data;
       for (var i = 0; i < this.content.length; i++) {
         this.$store.state.categoryContent.push(this.content[i]);

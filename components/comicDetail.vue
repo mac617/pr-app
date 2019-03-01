@@ -27,14 +27,14 @@
 
       </v-card>
     </v-flex>
-    <ComicDetail />
+    <ComicDetail /> 
   </v-card>-->
   <v-layout justify-center>
     <v-flex lg12 md12 xs12 style="padding:0px">
       <div slot="header">
         <!-- <v-flex> -->
         <v-flex xs12>
-          <v-card class="black--text">
+          <v-card>
             <v-layout>
               <v-flex xs5 align-self-center>
                 <v-img :src="bookImg" height="125px" contain></v-img>
@@ -60,26 +60,20 @@
               <!-- <v-spacer></v-spacer> -->
               <!-- <v-spacer></v-spacer> -->
               <!-- <v-spacer></v-spacer> -->
-              <v-btn
-                small
-                class="white--text"
-                color="black"
-                v-if="checkCollectList"
-                @click.stop="delCollect()"
-              >
+              <v-btn color="#424242" small class="white--text" v-if="checkCollectList" @click.stop="delCollect()">
                 <v-icon left color="pink">favorite</v-icon>收藏
               </v-btn>
               <v-btn
-                color="black"
+                color="#424242"
                 small
                 class="white--text"
                 v-else-if="!checkCollectList"
-                @click.stop="addCollect();loader = 'loading3'"
+                @click.stop="addCollect()"
               >
                 <v-icon left color="white">favorite</v-icon>收藏
               </v-btn>
 
-              <v-btn @click="toComicView()">开始阅读</v-btn>
+              <v-btn color="#424242" class="white--text" @click="toComicView()">开始阅读</v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -180,7 +174,8 @@ export default {
     // }
   },
   created() {
-    console.log(this.$route.params.bookUrl);
+    window.scrollTo(0, 0);
+    this.getCollect();
     // let data= JSON.parse(this.history)
     // console.log("历史数据" + this.history.item.id);
     // console.log("这个收藏数据" + this.collectList);
@@ -232,7 +227,7 @@ export default {
     }
   },
   methods: {
-    toComicView: function(item) {
+    toComicView: function() {
       this.setHistory();
       let id = this.$route.params.bookUrl;
       this.$router.push({ path: "/comicview/" + id + "/" + "01" });
@@ -241,6 +236,7 @@ export default {
       // checkLogin
       if (!this.username.length) {
         this.$router.push("/login");
+        return false;
       }
       let username = this.username;
       let id = this.$route.params.bookUrl;
@@ -285,7 +281,8 @@ export default {
           username: username
         }
       );
-      if (status === 200 && data && data.code === 0) {
+      if (status === 200 && data.results.length && data.code === 0) {
+        console.log(data);
         this.collectList = data.results[0].collect;
         console.log("这是collectList" + this.collectList);
       }
@@ -331,14 +328,14 @@ export default {
           readTime: readTime()
         },
         comicDetail: {
-          //   bookAuthor: this.comicDetail.author,
-          bookImg: this.bookImg
-          //   bookTitle: this.comicDetail.bookTitle,
-          //   bookYear: this.comicDetail.year,
-          //   bookStatus: this.comicDetail.status,
-          //   bookUpdataNum: this.comicDetail.updateNum,
-          //   bookUpdateTime: this.comicDetail.updateTime,
-          //   bookCountry: this.comicDetail.country
+          bookAuthor: this.$store.state.comicDetail.author,
+          bookImg: this.$store.state.comicDetail.bookImg,
+          bookTitle: this.$store.state.comicDetail.bookTitle,
+          bookYear: this.$store.state.comicDetail.year,
+          bookStatus: this.$store.state.comicDetail.status,
+          bookUpdataNum: this.$store.state.comicDetail.updateNum,
+          bookUpdateTime: this.$store.state.comicDetail.updateTime,
+          bookCountry: this.$store.state.comicDetail.country
         }
       };
       if (oldHistory != null) {

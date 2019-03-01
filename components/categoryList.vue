@@ -11,10 +11,12 @@
     <v-flex lg12>-->
     <!-- {{content}} -->
     <!-- <v-card> -->
-      <v-container>
+      <v-layout justify-center ma-0>
+      <v-flex>
+        <v-container fluid grid-list-lg>
         <v-layout row wrap justify-center>
-          <v-flex lg6 md6 xs12 v-for="item in content" :key="item.id">
-            <v-card class="black--text">
+          <v-flex lg6 md6 sm8 xs12 v-for="item in content" :key="item.id">
+            <v-card>
               <v-layout justify-center>
                 <v-flex xs5>
                   <v-img :src="item.bookImg" height="125px" contain/>
@@ -27,8 +29,11 @@
                       <!-- <div>{{item.comicDetail.bookAuthor}}</div> -->
                       <!-- <div>{{ item.comicDetail.bookYear }}</div> -->
                       <!-- <div>{{ item.comicDetail.bookCountry }}</div> -->
-                      <div>更新至 : {{ item.updateChapterName }}</div>
-                      <div>更新时间 : {{ item.updateTime }}</div>
+                      <span>更新至 : {{ item.updateChapterName }}</span>
+                      <div style="overflow:hidden">
+                            <div style="float:left">更新时间 :&nbsp</div>
+                            <div style="float:left">{{ item.updateTime }}</div>
+                          </div>
                     </div>
                   </v-card-title>
                 </v-flex>
@@ -55,6 +60,8 @@
           </v-flex>
         </v-layout>
       </v-container>
+      </v-flex>
+    </v-layout>
     <!-- </v-card> -->
     <!-- </v-flex>
       
@@ -73,6 +80,7 @@ export default {
     toComic(item) {
       let bookUrl = item.bookUrl.replace(/\//g, "");
       this.$router.push({ path: "/comic/" + bookUrl });
+      
     }
   }
 };

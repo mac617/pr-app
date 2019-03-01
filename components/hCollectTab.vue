@@ -48,7 +48,7 @@ export default {
 };
 </script>
 <style lang="css" scoped>
-.v-card__text {
+/* .v-card__text {
   padding: 0px !important;
-}
+} */
 </style>

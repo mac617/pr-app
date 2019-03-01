@@ -5,6 +5,7 @@
       <v-flex lg5 md12>
         <v-card>
           <v-card-title>登录</v-card-title>
+          
           <v-card-actions>
             <v-form v-model="valid" style="width:100%">
               <v-text-field
@@ -28,7 +29,15 @@
                 <v-btn to="signUp">注册</v-btn>
               </center>
             </v-form>
+            
           </v-card-actions>
+          <!-- <v-alert
+          v-if="error"
+          :value="true"
+          color="warning"
+          transition="scale-transition"
+        >{{error}}</v-alert> -->
+        <div class="error text-lg-center text-md-center text-sm-center text-xs-center">{{error}}</div>
         </v-card>
       </v-flex>
     </v-layout>
@@ -39,7 +48,7 @@
 import CryptoJS from "crypto-js";
 import NavBar from "@/navBar.vue";
 export default {
-  components:{
+  components: {
     NavBar
   },
   data() {
@@ -47,6 +56,7 @@ export default {
       show: false,
       username: "",
       password: "",
+      error: "",
       valid: false,
       rules: {
         required: value => !!value || "Required.",
@@ -78,5 +88,5 @@ export default {
   }
 };
 </script>
-<style lang="css">
+<style lang="css" scoped>
 </style>

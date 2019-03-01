@@ -1,13 +1,13 @@
 <template>
   <div class="pr-navbar">
     <v-navigation-drawer v-model="drawer" app temporary dense>
-      <v-list v-if="user">
+      <v-list v-if="this.user">
         <v-list-tile>
           <v-list-tile-action>
             <v-icon/>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>{{ user }}</v-list-tile-title>
+            <v-list-tile-title>{{ this.user }}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
         <!-- 
@@ -34,14 +34,14 @@
 
       <v-list>
         <v-divider/>
-        <v-list-tile @click="toSearch()">
+        <!-- <v-list-tile @click="toSearch()">
           <v-list-tile-action>
             <v-icon/>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>搜索</v-list-tile-title>
           </v-list-tile-content>
-        </v-list-tile>
+        </v-list-tile>-->
         <!-- <v-list-tile @click="toHistory()">
           <v-list-tile-action>
             <v-icon/>
@@ -50,7 +50,7 @@
             <v-list-tile-title>历史记录</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>-->
-        <v-list-tile @click="test()">
+        <v-list-tile @click="toAbout()">
           <v-list-tile-action>
             <v-icon/>
           </v-list-tile-action>
@@ -58,21 +58,31 @@
             <v-list-tile-title>关于本站</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile @click="toDevLop()">
+          <v-list-tile-action>
+            <v-icon/>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>开发日志</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-divider/>
         <v-list-tile @click="darkMode()">
           <v-list-tile-action>
             <v-icon/>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>夜间模式</v-list-tile-title>
+            <v-list-tile-title v-if="this.$store.state.dark">日间模式</v-list-tile-title>
+            <v-list-tile-title v-else>夜间模式</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-
-        <v-list-tile @click="exit()">
+<v-divider/>
+        <v-list-tile v-if="user" @click="exit()">
           <v-list-tile-action>
             <v-icon/>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>exit</v-list-tile-title>
+            <v-list-tile-title>退出</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -80,10 +90,31 @@
 
     <v-toolbar dense>
       <v-toolbar-side-icon @click="drawer = !drawer"/>
+      <v-btn flat @click="toHome()">
+        <v-toolbar-title class="title">PRPRPR</v-toolbar-title>
+      </v-btn>
+      <!-- <VBtn
+        class="toolbar-item"
+        flat
+        dark
+        @click.stop="toHomepage"
+      >
+        <VToolbarTitle class="toolbar-title"><img
+            class="logo"
+            src="../../../public/img/icons/android-chrome-192x192.png"
+          >
+          BiliOB观测者</VToolbarTitle>
+      </VBtn>-->
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn flat @click="toHome()">首页</v-btn>
-        <v-btn flat @click="toHistory()">收藏/历史</v-btn>
-        <v-btn flat @click="toCategory()">分区</v-btn>
+        <v-btn flat @click="toHome()">
+          <VIcon>home</VIcon>首页
+        </v-btn>
+        <v-btn flat @click="toHistory()">
+          <VIcon>history</VIcon>收藏/历史
+        </v-btn>
+        <v-btn flat @click="toCategory()">
+          <VIcon>category</VIcon>分区
+        </v-btn>
       </v-toolbar-items>
       <v-menu :nudge-width="100" class="hidden-md-and-up">
         <v-toolbar-title slot="activator">
@@ -111,17 +142,11 @@
       </v-layout>-->
       <!-- <v-container> -->
       <v-layout justify-end v-if="switch1OnOff">
-        <v-switch v-model="$store.state.switch1" label="自动加载" color="red" value="red" hide-details></v-switch>
+        <VIcon style="vertical-align: middle">format_line_spacing</VIcon>
+        <v-switch v-model="$store.state.switch1" color="red" value="red" hide-details></v-switch>
         <!-- </v-container> -->
       </v-layout>
     </v-toolbar>
-    <!-- <v-breadcrumbs
-      v-if="this.$vuetify.breakpoint.smAndUp&&this.breadOnOff"
-      :items="breads"
-      class="justify-center"
-    >
-      <v-icon slot="divider">forward</v-icon>
-    </v-breadcrumbs> -->
   </div>
 </template>
 
@@ -130,7 +155,6 @@ export default {
   data() {
     return {
       drawer: false,
-      user: "",
       breads: [
         {
           text: "首页",
@@ -157,8 +181,11 @@ export default {
     breadOnOff: function() {
       return this.$route.path.includes("comicview");
     },
-    switch1OnOff:function(){
+    switch1OnOff: function() {
       return this.$route.path.includes("comicview");
+    },
+    user: function() {
+      return this.$store.state.user;
     }
   },
   // created() {
@@ -170,7 +197,6 @@ export default {
       data: { user }
     } = await this.$axios.get("/user/users/getUser");
     if (status === 200) {
-      this.user = user;
       this.$store.state.user = user;
       // this.sendComic(this.user);
     }
@@ -201,11 +227,18 @@ export default {
     toCategory() {
       this.$router.push("/category");
     },
+    toDevLop() {
+      this.$router.push("/devlop");
+    },
+    toAbout() {
+      this.$router.push("/about");
+    },
     async exit() {
       this.drawer = !this.drawer;
       let self = this;
       const { status, data } = await this.$axios.get("/user/users/exit");
       if (status === 200 && data && data.code === 0) {
+        this.$store.state.user = "";
         this.$router.push("/");
       }
     },
@@ -235,7 +268,7 @@ export default {
   }
 };
 </script>
-<style lang="css">
+<style lang="css" scoped>
 .v-btn {
   padding: 0px !important;
 }
@@ -248,5 +281,10 @@ export default {
 }
 .v-input--selection-controls {
   padding-top: 0px !important;
+  /* padding-bottom: 1rem !important; */
+}
+
+.v-breadcrumbs__item{
+  color:#424242
 }
 </style>

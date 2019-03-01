@@ -191,12 +191,12 @@ export default {
         { state: "连载", abbr: "lz-1-" },
         { state: "完结", abbr: "lz-2-" }
       ],
-      order: { state: "最新发布", abbr: "order-id" },
+      order: { state: "发布", abbr: "order-id" },
       orderList: [
-        { state: "最新发布", abbr: "order-id" },
-        { state: "最近更新", abbr: "order-addtime" },
-        { state: "人气最旺", abbr: "order-hits" },
-        { state: "评分最高", abbr: "order-gold" }
+        { state: "发布", abbr: "order-id" },
+        { state: "更新", abbr: "order-addtime" },
+        { state: "人气", abbr: "order-hits" },
+        { state: "评分", abbr: "order-gold" }
       ]
       // ["全部", "日本", "港台", "欧美", "韩国", "国产", "其它"]
     };

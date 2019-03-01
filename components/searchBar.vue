@@ -10,6 +10,7 @@
     label="搜索"
     :hint="'haha'"
     @click:append="sendMessage"
+    @keyup.enter="sendMessage"
   />
   <!-- </v-flex>
   </v-layout>-->

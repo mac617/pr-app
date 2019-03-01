@@ -31,7 +31,8 @@ export default {
   methods: {
     addContent() {
       this.$store.state.loading = true;
-      console.log(this.$refs.categoryList.addContent());
+      this.$refs.categoryList.addContent();
+      
     }
     // chargeLoading() {
     //   let self = this;

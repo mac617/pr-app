@@ -1,6 +1,7 @@
 <template>
   <div>
     <NavBar/>
+    <Banner/>
     <v-container>
       <v-layout>
         <!-- <v-container>
@@ -17,9 +18,11 @@
 
 <script>
 import NavBar from "@/navBar.vue";
+import Banner from "@/banner.vue";
 export default {
   components: {
-    NavBar
+    NavBar,
+    Banner
   }
 };
 </script>

@@ -2,7 +2,7 @@
   <div class="pr-home">
     <MainLayout>
       <NavBar slot="navBar"></NavBar>
-      <Banner slot="banner"></Banner>
+      <!-- <Banner slot="banner"></Banner> -->
       <SearchBar slot="searchBar"></SearchBar>
       <SideCard slot="sideCard"></SideCard>
       <IndexTab slot="content"></IndexTab>

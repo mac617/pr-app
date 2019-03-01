@@ -99,74 +99,77 @@ export default {
       this.$store.state.page = 7;
       window.scrollTo(0, 0);
       this.$store.state.chapterBtnDialog = !this.$store.state.chapterBtnDialog;
-      let storage = window.localStorage;
-      let content = [];
-      let oldHistory = JSON.parse(storage.getItem("history"));
-      console.log("老数据" + oldHistory);
-      let readTime = function() {
-        let year = new Date().getFullYear();
-        let month = new Date().getMonth() + 1;
-        let day = new Date().getDate();
-        let hours = new Date().getHours();
-        let minutes = new Date().getMinutes();
-        let seconds = new Date().getSeconds();
-        if (seconds < 10) {
-          seconds = "0" + seconds;
-        }
-
-        return (
-          year +
-          "年" +
-          month +
-          "月" +
-          day +
-          "日" +
-          hours +
-          ":" +
-          minutes +
-          ":" +
-          seconds
-        );
-      };
-      console.log("时间" + readTime());
-      let newHistory = {
-        item: {
-          id: item.comicNo,
-          bookTitle: this.comicDetail.bookTitle,
-          chapterName: item.chapterNum,
-          chapterNo: item.chapterNo,
-          readTime: readTime()
-        },
-        comicDetail: {
-          //   bookAuthor: this.comicDetail.author,
-          bookImg: this.comicDetail.bookImg
-          //   bookTitle: this.comicDetail.bookTitle,
-          //   bookYear: this.comicDetail.year,
-          //   bookStatus: this.comicDetail.status,
-          //   bookUpdataNum: this.comicDetail.updateNum,
-          //   bookUpdateTime: this.comicDetail.updateTime,
-          //   bookCountry: this.comicDetail.country
-        }
-      };
-      if (oldHistory != null) {
-        //遍历oldHistory数组,再把oldHistory Push进去新数组
-        for (var i = 0; i < oldHistory.length; i++) {
-          console.log(oldHistory[i].item.id);
-          console.log(newHistory.item.id);
-          //去除与newHistory重复的数据
-          if (oldHistory[i].item.id != newHistory.item.id) {
-            content.push(oldHistory[i]);
+      if (this.$route.path.includes("comic/")) {
+        let storage = window.localStorage;
+        let content = [];
+        let oldHistory = JSON.parse(storage.getItem("history"));
+        console.log("老数据" + oldHistory);
+        let readTime = function() {
+          let year = new Date().getFullYear();
+          let month = new Date().getMonth() + 1;
+          let day = new Date().getDate();
+          let hours = new Date().getHours();
+          let minutes = new Date().getMinutes();
+          let seconds = new Date().getSeconds();
+          if (seconds < 10) {
+            seconds = "0" + seconds;
           }
-          console.log(content);
-        }
-        //增加newHistory点击的数据
 
-        content.push(newHistory);
-        console.log(content);
-      } else {
-        content.push(newHistory);
+          return (
+            year +
+            "年" +
+            month +
+            "月" +
+            day +
+            "日" +
+            hours +
+            ":" +
+            minutes +
+            ":" +
+            seconds
+          );
+        };
+        console.log("时间" + readTime());
+        let newHistory = {
+          item: {
+            id: item.comicNo,
+            bookTitle: this.comicDetail.bookTitle,
+            chapterName: item.chapterNum,
+            chapterNo: item.chapterNo,
+            readTime: readTime()
+          },
+          comicDetail: {
+            bookAuthor: this.comicDetail.author,
+            bookImg: this.comicDetail.bookImg,
+            bookTitle: this.comicDetail.bookTitle,
+            bookYear: this.comicDetail.year,
+            bookStatus: this.comicDetail.status,
+            bookUpdataNum: this.comicDetail.updateNum,
+            bookUpdateTime: this.comicDetail.updateTime,
+            bookCountry: this.comicDetail.country
+          }
+        };
+        if (oldHistory != null) {
+          //遍历oldHistory数组,再把oldHistory Push进去新数组
+          for (var i = 0; i < oldHistory.length; i++) {
+            console.log(oldHistory[i].item.id);
+            console.log(newHistory.item.id);
+            //去除与newHistory重复的数据
+            if (oldHistory[i].item.id != newHistory.item.id) {
+              content.push(oldHistory[i]);
+            }
+            console.log(content);
+          }
+          //增加newHistory点击的数据
+
+          content.push(newHistory);
+          console.log(content);
+        } else {
+          content.push(newHistory);
+        }
+        storage.setItem("history", JSON.stringify(content));
       }
-      storage.setItem("history", JSON.stringify(content));
+
       // console.log("jieguo" + results);
       // let history = JSON.parse(storage.getItem("history"));
       // console.log(history);

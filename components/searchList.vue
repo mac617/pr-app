@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <!-- <v-container fluid grid-list-lg>
+  <!-- <v-container fluid grid-list-lg>
       <v-layout row wrap>
         <v-flex xs12>
           <v-card color="cyan darken-2" class="white--text">
@@ -34,61 +33,72 @@
           </v-card>
         </v-flex>
       </v-layout>
-    </v-container>-->
-    <!-- <v-container fluid grid-list-lg>
-    <v-layout justify-center row wrap>-->
-    <!-- <v-flex> -->
-    <v-card>
-      <v-layout row wrap justify-center>
-        <v-flex lg8 md8 xs12 v-for="item in newList" :key="item.id" @click="qie(item)">
-          <v-card class="black--text">
-            <v-layout justify-center>
-              <v-flex xs5>
-                <v-img :src="item.bookImg" height="125px" contain/>
-              </v-flex>
-              <v-flex xs7>
-                <v-card-title primary-title>
-                  <div>
-                    <div class="subheading">
-                      {{ item.bookTitle }}
-                      <span class="caption">({{ item.bookStatus }})</span>
-                    </div>
-                    <div class="caption">{{ item.bookAuthor }}</div>
-                    <div class="caption">{{ item.bookYear+'年' }}</div>
-                    <div class="caption">{{ item.bookCountry }}</div>
-                    <div class="caption">{{ '更新到:'+item.bookUpdataNum }}</div>
-                    <div class="caption">{{ '更新时间:'+item.bookUpdateTime }}</div>
-                  </div>
-                </v-card-title>
+  </v-container>-->
+  <!-- <v-container fluid grid-list-lg>
+  <v-layout justify-center row wrap>-->
+  <!-- <v-flex> -->
+  <v-card flat>
+    <v-card-text>
+      <v-layout justify-center ma-0>
+        <v-flex>
+          <v-container fluid grid-list-lg>
+            <v-layout row wrap justify-center>
+              <v-flex lg6 md6 sm8 xs12 v-for="item in newList" :key="item.id" @click="qie(item)">
+                <v-card>
+                  <v-layout>
+                    <v-flex xs5 align-self-center>
+                      <v-img :src="item.bookImg" height="125px" contain/>
+                    </v-flex>
+                    <v-flex xs7>
+                      <v-card-title primary-title>
+                        <!-- <div> -->
+                        <div class="text-truncate">
+                          <span class="headline">{{ item.bookTitle }}</span>
+                          <div class="body-2">({{ item.bookStatus }})</div>
+                          <div>{{ item.bookAuthor }}</div>
+                          <div>{{ item.bookYear+'年' }}</div>
+                          <div>{{ item.bookCountry }}</div>
+                          <span>更新至 : {{ item.bookUpdataNum }}</span>
+                          <div style="overflow:hidden">
+                            <div style="float:left">更新时间 :&nbsp</div>
+                            <div style="float:left">{{ item.bookUpdateTime }}</div>
+                          </div>
+                        </div>
+
+                        <!-- </div> -->
+                      </v-card-title>
+                    </v-flex>
+                  </v-layout>
+                  <v-divider light/>
+                  <v-card-actions class="pa-3">
+                    <!-- <v-spacer/> -->
+                    <v-rating
+                      v-model="item.bookScore"
+                      background-color="white"
+                      color="yellow accent-4"
+                      dense
+                      half-increments
+                      hover
+                      size="18"
+                      readonly
+                    />
+                    <v-spacer/>
+                    <v-btn @click.stop="toComic(item)">点击查看</v-btn>
+                  </v-card-actions>
+                  <v-slide-y-transition>
+                    <v-card-text v-show="item.isShow">{{item.bookSummary}}</v-card-text>
+                  </v-slide-y-transition>
+                </v-card>
               </v-flex>
             </v-layout>
-            <v-divider light/>
-            <v-card-actions class="pa-3">
-              <!-- <v-spacer/> -->
-              <v-rating
-                v-model="item.bookScore"
-                background-color="white"
-                color="yellow accent-4"
-                dense
-                half-increments
-                hover
-                size="18"
-                readonly
-              />
-              <v-spacer/>
-              <v-btn @click.stop="toComic(item)">点击查看</v-btn>
-            </v-card-actions>
-            <v-slide-y-transition>
-              <v-card-text v-show="item.isShow">{{item.bookSummary}}</v-card-text>
-            </v-slide-y-transition>
-          </v-card>
+          </v-container>
         </v-flex>
       </v-layout>
-    </v-card>
-    <!-- </v-flex> -->
-    <!-- </v-layout>
-    </v-container>-->
-  </div>
+    </v-card-text>
+  </v-card>
+  <!-- </v-flex> -->
+  <!-- </v-layout>
+  </v-container>-->
 </template>
 <script>
 export default {

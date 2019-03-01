@@ -1,11 +1,11 @@
 <template>
   <div class="pr-login">
-    <NavBar/>
+    <!-- <NavBar/> -->
     <v-layout justify-center>
       <v-flex xs10>
         <v-card>
           <v-card-title class="headline" primary-title>
-            <v-spacer></v-spacer>登录
+            <v-spacer></v-spacer>注册
             <v-spacer></v-spacer>
           </v-card-title>
           <v-card-actions>
@@ -56,7 +56,7 @@
                     ref="email"
                   />
                   <v-btn :disabled="!codeOnOff" @click.stop="sendMessge()">发送验证码</v-btn>
-                  <span>{{statusMsg}}</span>
+                  <div>{{statusMsg}}</div>
                   <v-spacer></v-spacer>
                   <v-text-field
                     v-model="verifyCode"
@@ -82,7 +82,7 @@
 import NavBar from "@/navBar.vue";
 import CryptoJS from "crypto-js";
 export default {
-  components:{NavBar},
+  components: { NavBar },
   data() {
     return {
       show: false,
@@ -109,8 +109,8 @@ export default {
             this.codeOnOff = true;
             return true;
           } else {
-            return "Invalid e-mail.";
             this.codeOnOff = false;
+            return "Invalid e-mail.";
           }
         }
       }

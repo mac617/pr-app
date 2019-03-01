@@ -11,7 +11,7 @@
       <v-flex lg5 md8 xs12 v-for="item in collectList" :key="item.id" @click="toComic(item)">
         <div slot="header">
           <v-flex xs12>
-            <v-card color="cyan darken-2" class="white--text">
+            <v-card color="cyan darken-2">
               <v-layout>
                 <v-flex xs5 lg5 style="padding:3px">
                   <v-img :src="item.comicDetail.bookImg" contain/>
