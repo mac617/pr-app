@@ -286,11 +286,10 @@ export default {
   },
 
   mounted() {
-    let black1 = document
-      .getElementsByClassName("v-breadcrumbs__item")[0]
-      if(black1) {
-        black1.setAttribute("style", "color:#424242 !important");
-      }
+    let black1 = document.getElementsByClassName("v-breadcrumbs__item")[0];
+    if (black1) {
+      black1.setAttribute("style", "color:#424242 !important");
+    }
     console.log("这是comicview页面过来的");
     if (this.switch1) {
       window.addEventListener("scroll", this.autoPull);
@@ -322,7 +321,7 @@ export default {
   //   }
   // },
   async created() {
-    this.$store.state.page = 7
+    this.$store.state.page = 7;
     this.$store.state.chapterBtnDialog = false;
     window.scrollTo(0, 0);
     console.log("1");
@@ -333,14 +332,14 @@ export default {
       this.$route.params.chapterNo +
       ".html";
     let data = await this.getImg(url);
-    // let black1 = document
-    //   .getElementsByClassName("v-breadcrumbs__item")[0]
-    //   .setAttribute("style", "color:#424242 !important");
-    // let black2 = document
-    //   .getElementsByClassName("v-breadcrumbs__item")[1]
-    //   .setAttribute("style", "color:#424242 !important");
     this.content = data;
     this.setHistory(data);
+    let black1 = document
+      .getElementsByClassName("v-breadcrumbs__item")[0]
+      .setAttribute("style", "color:#424242 !important");
+    let black2 = document
+      .getElementsByClassName("v-breadcrumbs__item")[1]
+      .setAttribute("style", "color:#424242 !important");
   },
   methods: {
     async pull() {
@@ -608,18 +607,19 @@ export default {
       this.$store.state.prevLoading = true;
       this.$store.state.num = 0;
       // window.scrollTo(0, 0);
-      this.lazyNextNum = 0;
       // window.location.reload();
       // console.log(this.chapterList)
       // console.log(this.chapterNoDelZero);
+      // let lazyNextNum = this.lazyNextNum; //在跳转之前记录累计自动加载了多少话,清空this.lazyNextNum
+      this.lazyNextNum = 0;
       this.$router.push({
         path:
           "/comicview" +
           "/" +
           this.$route.params.comicNo +
           "/" +
-          this.chapterList[this.chapterNoDelZero - 2 - this.lazyNextNum]
-            .chapterNo
+          this.chapterList[this.chapterNoDelZero - 2].chapterNo
+        // this.chapterList[this.chapterNoDelZero - 2 - lazyNextNum].chapterNo
         // query: {
         //   chapterNo: this.chapterList[this.$route.params.chapterNo.replace(/\b(0+)/gi, "") - 1]
         //     .chapterNo,
@@ -637,16 +637,18 @@ export default {
       this.$store.state.nextLoading = true;
       this.$store.state.num = 0;
       // window.scrollTo(0, 0);
-      this.lazyNextNum = 0;
+      // this.lazyNextNum = 0;****
       // window.location.reload();
       setTimeout(function() {
+        let lazyNextNum = self.lazyNextNum; //在跳转之前记录累计自动加载了多少话,清空this.lazyNextNum
+        self.lazyNextNum = 0;
         self.$router.push({
           path:
             "/comicview" +
             "/" +
             self.$route.params.comicNo +
             "/" +
-            self.chapterList[self.chapterNoDelZero + self.lazyNextNum].chapterNo
+            self.chapterList[self.chapterNoDelZero + lazyNextNum].chapterNo
         });
       }, 2000);
     },
@@ -773,6 +775,9 @@ export default {
   bottom: 2rem !important;
 }
 
+.v-breadcrumbs {
+  color: black;
+}
 
 /* .v-breadcrumbs__item {
   color: black !important;

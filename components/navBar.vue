@@ -111,7 +111,7 @@
           <v-icon>arrow_drop_down</v-icon>
         </v-toolbar-title>
 
-        <v-list> 
+        <v-list>
           <v-list-tile @click="toHome()">
             <v-icon>home</v-icon>
             <v-list-tile-title>首页</v-list-tile-title>
@@ -134,8 +134,11 @@
       </v-layout>-->
       <!-- <v-container> -->
       <v-layout justify-end v-if="switch1OnOff">
-        <VIcon style="vertical-align: middle">format_line_spacing</VIcon>
-        <v-switch v-model="$store.state.switch1" color="red" value="red" hide-details></v-switch>
+        <VIcon
+          style="vertical-align: middle"
+          :color="this.$store.state.switch1?'yellow darken-3':'white'"
+        >format_line_spacing</VIcon>
+        <v-switch v-model="$store.state.switch1" color="yellow darken-3" hide-details></v-switch>
         <!-- </v-container> -->
       </v-layout>
     </v-toolbar>
@@ -178,6 +181,9 @@ export default {
     },
     user: function() {
       return this.$store.state.user;
+    },
+    switch1: function() {
+      return this.$store.state.switch1;
     }
   },
   // created() {
@@ -280,7 +286,7 @@ export default {
   color: #424242;
 }
 
-.v-icon{
-  color:#fff !important;
+.v-icon {
+  color: #fff !important;
 }
 </style>

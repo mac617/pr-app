@@ -63,9 +63,12 @@
       </v-dialog>
     </v-layout>
     <div class="hidden-xs-and-up">
-      <v-btn fab dark :small="this.$vuetify.breakpoint.smAndDown" @click="toHome()">
-        <v-icon dark>home</v-icon>
-      </v-btn>
+      <Scroll>
+        <v-btn slot="scrollBtn" fab dark :small="this.$vuetify.breakpoint.smAndDown">
+          <v-icon dark>vertical_align_top</v-icon>
+        </v-btn>
+      </Scroll>
+
       <v-btn
         v-if="checkCollectList"
         @click.stop="delCollect()"
@@ -73,7 +76,7 @@
         dark
         :small="this.$vuetify.breakpoint.smAndDown"
       >
-        <v-icon color="pink">favorite</v-icon>
+        <v-icon color="yellow darken-3">favorite</v-icon>
       </v-btn>
 
       <v-btn
@@ -85,14 +88,29 @@
       >
         <v-icon color="white">favorite</v-icon>
       </v-btn>
+
+      <v-btn
+        v-if="this.$store.state.switch1"
+        fab
+        dark
+        :small="this.$vuetify.breakpoint.smAndDown"
+        @click.stop="autoMode()"
+      >
+        <v-icon color="yellow darken-3">format_line_spacing</v-icon>
+      </v-btn>
+      <v-btn
+        v-else-if="!this.$store.state.switch1"
+        fab
+        dark
+        :small="this.$vuetify.breakpoint.smAndDown"
+        @click.stop="autoMode()"
+      >
+        <v-icon color="white">format_line_spacing</v-icon>
+      </v-btn>
+
       <!-- <v-btn fab dark :small="this.$vuetify.breakpoint.smAndDown">
         <v-icon dark>vertical_align_top</v-icon>
       </v-btn>-->
-      <Scroll>
-        <v-btn slot="scrollBtn" fab dark :small="this.$vuetify.breakpoint.smAndDown">
-          <v-icon dark>vertical_align_top</v-icon>
-        </v-btn>
-      </Scroll>
       <!-- <v-btn @click="toNext" fab dark :small="this.$vuetify.breakpoint.smAndDown">
         <v-icon dark>format_indent_increase</v-icon>
       </v-btn>
@@ -225,6 +243,9 @@ export default {
     this.getCollect();
   },
   methods: {
+    autoMode() {
+      this.$store.state.switch1 = !this.$store.state.switch1;
+    },
     getHistory() {
       console.log("comicViewWindow");
       // let localBookTitle = data.bookTitle;
@@ -319,7 +340,7 @@ export default {
       this.$emit("toPrev");
     },
     toHome() {
-      window.scrollTo(0, 0)
+      window.scrollTo(0, 0);
       this.$router.push("/");
       // this.$store.state.showIndexTab = true;
       // this.drawer = !this.drawer;
