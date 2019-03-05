@@ -1,7 +1,7 @@
 <template>
   <div class="indexComic">
     <v-layout justify-center>
-      <v-flex>
+      <v-flex style="padding-top:0">
         <v-tabs slot="extension" v-model="model" centered fixed-tabs>
           <v-tab class="font-weight-bold subheading" :href="`#tab-${1}`">热门连载</v-tab>
           <v-tab class="font-weight-bold subheading" :href="`#tab-${2}`">经典完结</v-tab>

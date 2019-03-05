@@ -39,7 +39,7 @@
             <v-btn icon dark @click="$store.state.chapterBtnDialog= !$store.state.chapterBtnDialog">
               <v-icon>close</v-icon>
             </v-btn>
-            <v-toolbar-title>Settings</v-toolbar-title>
+            <v-toolbar-title>目录</v-toolbar-title>
             <v-spacer></v-spacer>
           </v-toolbar>
           <ChapterList/>
@@ -319,6 +319,7 @@ export default {
       this.$emit("toPrev");
     },
     toHome() {
+      window.scrollTo(0, 0)
       this.$router.push("/");
       // this.$store.state.showIndexTab = true;
       // this.drawer = !this.drawer;

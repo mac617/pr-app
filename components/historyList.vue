@@ -112,8 +112,10 @@ export default {
     // this.history = storage.getItem("history");
     // if (storage.getItem("history")) {
     //   this.history = JSON.parse(storage.getItem("history"));
-    this.history = JSON.parse(storage.getItem("history")).reverse();
-    console.log(this.history);
+    if (JSON.parse(storage.getItem("history")) !== null) {
+      this.history = JSON.parse(storage.getItem("history")).reverse();
+      console.log(this.history);
+    }
     // this.history.reverse();
     // this.history = storage.getItem("history");
     // console.log(this.history[0].comicDetail.bookImg);

@@ -5,6 +5,7 @@
         <v-layout justify-center>
           <v-flex lg11 md11 xs11>
             <CategorySelect ref="categoryList"/>
+            <v-divider style="margin:1rem 0"/>
             <CategoryList/>
             <v-btn
               color="secondary"

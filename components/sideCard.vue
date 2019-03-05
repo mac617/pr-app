@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-card style="margin-top:1rem">
+  <div class="sideCard">
+    <v-card>
       <v-card-title class="title">漫画说明</v-card-title>
       <v-card-text>这是网络上趴下来的漫画,
         <br>可能会有点慢,
@@ -29,7 +29,7 @@
         <br>
         <a href="https://www.vultr.com/">
           <v-icon style="vertical-align: middle">mdi-link-variant</v-icon>
-          <span>服务器Vultr</span>
+          <span>服务商Vultr</span>
         </a>
         <br>
       </v-card-text>
@@ -49,5 +49,15 @@ a {
 span {
   text-decoration: none;
   color: #777;
+}
+
+.sideCard{
+  margin-left:1rem !important;
+}
+@media only screen and (max-width: 1264px) {
+  .sideCard {
+    margin-left:0rem !important;
+    /* padding-bottom: 4px !important; */
+  }
 }
 </style>

@@ -9,7 +9,7 @@ import "vuetify/dist/vuetify.min.css";
 import "material-design-icons-iconfont/dist/material-design-icons.css";
 import store from "./store";
 import Spider from "../server/spider";
-// import "@mdi/font/css/materialdesignicons.css";
+import "@mdi/font/css/materialdesignicons.css";
 // import Vuelidate from "vuelidate";
 import VueTouch from "vue-touch";
 Vue.use(VueTouch, { name: "v-touch" });

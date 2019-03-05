@@ -77,10 +77,10 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-toolbar color="#424242" dense>
+    <v-toolbar dense color="#424242">
       <v-toolbar-side-icon @click="drawer = !drawer"/>
       <v-btn flat @click="toHome()">
-        <v-toolbar-title class="title">PRPRPR</v-toolbar-title>
+        <v-toolbar-title class="title white--text">PRPRPR</v-toolbar-title>
       </v-btn>
       <!-- <VBtn
         class="toolbar-item"
@@ -95,23 +95,23 @@
           BiliOB观测者</VToolbarTitle>
       </VBtn>-->
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn flat @click="toHome()">
+        <v-btn flat @click="toHome()" color="#fff">
           <v-icon>home</v-icon>首页
         </v-btn>
-        <v-btn flat @click="toHistory()">
+        <v-btn flat @click="toHistory()" color="#fff">
           <v-icon>history</v-icon>收藏/历史
         </v-btn>
-        <v-btn flat @click="toCategory()">
+        <v-btn flat @click="toCategory()" color="#fff">
           <v-icon>category</v-icon>分区
         </v-btn>
       </v-toolbar-items>
-      <v-menu :nudge-width="100" class="hidden-md-and-up">
+      <v-menu :nudge-width="100" class="hidden-md-and-up" dark>
         <v-toolbar-title slot="activator">
-          <span>导航</span>
+          <span class="white--text">导航</span>
           <v-icon>arrow_drop_down</v-icon>
         </v-toolbar-title>
 
-        <v-list>
+        <v-list> 
           <v-list-tile @click="toHome()">
             <v-icon>home</v-icon>
             <v-list-tile-title>首页</v-list-tile-title>
@@ -278,5 +278,9 @@ export default {
 
 .v-breadcrumbs__item {
   color: #424242;
+}
+
+.v-icon{
+  color:#fff !important;
 }
 </style>

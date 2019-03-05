@@ -3,8 +3,7 @@
     <v-flex xs12>
       <v-tabs
         dark
-        centered
-        grow
+        fixed-tabs
         next-icon="mdi-arrow-right-bold-box-outline"
         prev-icon="mdi-arrow-left-bold-box-outline"
         show-arrows

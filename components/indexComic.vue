@@ -14,7 +14,7 @@
             <v-card flat>
               <v-card-text>
                 <!-- {{hLove}} -->
-                <v-container grid-list-md>
+                <!-- <v-container grid-list-md> -->
                   <v-layout justify-center>
                     <v-flex lg12 md12 xs12>
                       <v-card>
@@ -28,7 +28,7 @@
                             :key="item.id"
                             @click="toComic(item)"
                           >
-                            <v-card>
+                            <v-card class="indexComicImg">
                               <v-img :src="item.bookImg" :aspect-ratio="3/4"></v-img>
                               <v-card-text>
                                 <div
@@ -41,21 +41,21 @@
                       </v-card>
                     </v-flex>
                   </v-layout>
-                </v-container>
+                <!-- </v-container> -->
               </v-card-text>
             </v-card>
           </v-tab-item>
           <v-tab-item lazy :value="`tab-${2}`">
             <v-card flat>
               <v-card-text>
-                <v-container grid-list-md>
+                <!-- <v-container grid-list-md> -->
                   <v-layout justify-center>
                     <v-flex lg12 md12 xs12>
                       <v-card>
                         <!-- <v-card-title class="headline">热门连载</v-card-title> -->
                         <v-layout row wrap>
                           <v-flex lg3 md3 xs4 v-for="item in hBlood.slice(0,8)" :key="item.id" @click="toComic(item)">
-                            <v-card>
+                            <v-card class="indexComicImg">
                               <v-img :src="item.bookImg" :aspect-ratio="3/4"></v-img>
                               <v-card-text>
                                 <div
@@ -68,21 +68,21 @@
                       </v-card>
                     </v-flex>
                   </v-layout>
-                </v-container>
+                <!-- </v-container> -->
               </v-card-text>
             </v-card>
           </v-tab-item>
           <v-tab-item lazy :value="`tab-${3}`">
             <v-card flat>
               <v-card-text>
-                <v-container grid-list-md>
+                <!-- <v-container grid-list-md> -->
                   <v-layout justify-center>
                     <v-flex lg12 md12 xs12>
                       <v-card>
                         <!-- <v-card-title class="headline">热门连载</v-card-title> -->
                         <v-layout row wrap>
                           <v-flex lg3 md3 xs4 v-for="item in hSport.slice(0,8)" :key="item.id" @click="toComic(item)">
-                            <v-card>
+                            <v-card class="indexComicImg">
                               <v-img :src="item.bookImg" :aspect-ratio="3/4"></v-img>
                               <v-card-text>
                                 <div
@@ -95,21 +95,21 @@
                       </v-card>
                     </v-flex>
                   </v-layout>
-                </v-container>
+                <!-- </v-container> -->
               </v-card-text>
             </v-card>
           </v-tab-item>
           <v-tab-item lazy :value="`tab-${4}`">
             <v-card flat>
               <v-card-text>
-                <v-container grid-list-md>
+                <!-- <v-container grid-list-md> -->
                   <v-layout justify-center>
                     <v-flex lg12 md12 xs12>
                       <v-card>
                         <!-- <v-card-title class="headline">热门连载</v-card-title> -->
                         <v-layout row wrap>
                           <v-flex lg3 md3 xs4 v-for="item in hFight.slice(0,8)" :key="item.id" @click="toComic(item)">
-                            <v-card>
+                            <v-card class="indexComicImg">
                               <v-img :src="item.bookImg" :aspect-ratio="3/4"></v-img>
                               <v-card-text>
                                 <div
@@ -122,7 +122,7 @@
                       </v-card>
                     </v-flex>
                   </v-layout>
-                </v-container>
+                <!-- </v-container> -->
               </v-card-text>
             </v-card>
           </v-tab-item>
@@ -181,5 +181,10 @@ export default {
 <style lang="css"scoped>
 .v-card__text {
   padding: 0px !important;
+}
+
+.indexComicImg {
+  margin: 0.3rem 0.3rem 0.3rem;
+  box-shadow: 1px 1px 6px 0px #333 !important;
 }
 </style>

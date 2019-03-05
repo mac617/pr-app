@@ -42,7 +42,7 @@
       <v-layout justify-center ma-0>
         <v-flex>
           <v-container fluid grid-list-lg>
-            <v-layout row wrap justify-center>
+            <v-layout row wrap :justify-center="$vuetify.breakpoint.smAndDown">
               <v-flex lg6 md6 sm8 xs12 v-for="item in newList" :key="item.id" @click="qie(item)">
                 <v-card>
                   <v-layout>
@@ -89,6 +89,7 @@
                     <v-card-text v-show="item.isShow">{{item.bookSummary}}</v-card-text>
                   </v-slide-y-transition>
                 </v-card>
+                <v-spacer></v-spacer>
               </v-flex>
             </v-layout>
           </v-container>
