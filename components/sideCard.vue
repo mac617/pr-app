@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card>
+    <v-card style="margin-top:1rem">
       <v-card-title class="title">漫画说明</v-card-title>
       <v-card-text>这是网络上趴下来的漫画,
         <br>可能会有点慢,
@@ -10,7 +10,7 @@
       </v-card-text>
     </v-card>
 
-    <v-card style="margin-top:0.7rem">
+    <v-card style="margin-top:1rem">
       <!-- <v-card-title>漫画说明</v-card-title> -->
       <v-card-text>
         <br>

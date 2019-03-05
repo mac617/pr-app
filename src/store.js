@@ -8,7 +8,7 @@ export default new Vuex.Store({
     switch1:false,
     progress:false,
     chapterBtnDialog: false,
-    fab: false,
+    fab: false, 
     dark: false,
     page: 7,
     num: 0,
@@ -23,7 +23,8 @@ export default new Vuex.Store({
     loading: false,
     prevLoading:false,
     nextLoading:false,
-    dataLoading:false
+    dataLoading:false,
+    readStart:true
   },
   mutations: {
     setSearchResult(state, val) {

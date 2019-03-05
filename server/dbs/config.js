@@ -1,8 +1,8 @@
 module.exports = {
-  dbs: "mongodb://127.0.0.1:27017/prprpr",
+  dbs: "mongodb://localhost:27017/prprpr",
   redis: {
     get host() {
-      return "127.0.0.1";
+      return "localhost";
     },
     get port() {
       return 6379;

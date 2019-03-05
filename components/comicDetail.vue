@@ -33,7 +33,7 @@
     <v-flex lg12 md12 xs12 style="padding:0px">
       <div slot="header">
         <!-- <v-flex> -->
-        <v-flex xs12>
+        <v-flex xs12 class="detail">
           <v-card>
             <v-layout>
               <v-flex xs5 align-self-center>
@@ -60,10 +60,18 @@
               <!-- <v-spacer></v-spacer> -->
               <!-- <v-spacer></v-spacer> -->
               <!-- <v-spacer></v-spacer> -->
-              <v-btn color="#424242" small class="white--text" v-if="checkCollectList" @click.stop="delCollect()">
+              <v-btn
+                :disabled="this.$store.state.readStart"
+                color="#424242"
+                small
+                class="white--text"
+                v-if="checkCollectList"
+                @click.stop="delCollect()"
+              >
                 <v-icon left color="pink">favorite</v-icon>收藏
               </v-btn>
               <v-btn
+                :disabled="this.$store.state.readStart"
                 color="#424242"
                 small
                 class="white--text"
@@ -73,7 +81,12 @@
                 <v-icon left color="white">favorite</v-icon>收藏
               </v-btn>
 
-              <v-btn color="#424242" class="white--text" @click="toComicView()">开始阅读</v-btn>
+              <v-btn
+                :disabled="this.$store.state.readStart"
+                color="#424242"
+                class="white--text"
+                @click="toComicView()"
+              >开始阅读</v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>

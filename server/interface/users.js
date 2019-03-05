@@ -213,7 +213,7 @@ router.post("/addCollect", async (ctx, next) => {
             bookYear: comicDetail.bookYear,
             bookCountry: comicDetail.bookCountry,
             bookUpdataNum: comicDetail.bookUpdataNum,
-            bookUpdateTime: comicDetail.bookUpdateTime,
+            bookUpdateTime: comicDetail.bookUpdateTime
           }
         }
       }
@@ -267,4 +267,9 @@ router.post("/getCollect", async (ctx, next) => {
     results
   };
 });
+
+router.post("/test", async (ctx, next) => {
+  ctx.body = "请求成功";
+});
+
 module.exports = router;

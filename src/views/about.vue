@@ -10,7 +10,7 @@
             <br>而且普遍的漫画网站手机端(甚至是电脑端),用户体验都非常不好,看漫画得一张一张的翻,比较麻烦,
             <br>所以就有了这个网站
           </v-card-text>
-
+<v-divider/>
           <v-card-title class="headline mb-0">关于架构</v-card-title>
           <v-card-text>
             <h3>前端</h3><br>
@@ -20,7 +20,6 @@
             <li>Vue-router路由</li>
             <li>UI库用了Vuetify.js,Material Design Icons</li>
             <br>
-
             <h3>后端</h3><br>
             <li>用了Koa2</li>
             <li>Axios</li>

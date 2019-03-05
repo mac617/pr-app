@@ -3,7 +3,7 @@
     <MainLayout>
       <NavBar slot="navBar"></NavBar>
       <!-- <Banner slot="banner"></Banner> -->
-      <SearchBar slot="searchBar"></SearchBar>
+      <!-- <SearchBar slot="searchBar"></SearchBar> -->
       <SideCard slot="sideCard"></SideCard>
       <HCollectTab slot="content"></HCollectTab>
       <!-- <BottomNav slot="bottomNav"></BottomNav> -->

@@ -3,7 +3,7 @@
     <MainLayout>
       <NavBar slot="navBar"></NavBar>
       <!-- <Banner slot="banner"></Banner> -->
-      <SearchBar slot="searchBar"></SearchBar>
+      <!-- <SearchBar slot="searchBar"></SearchBar> -->
       <SideCard slot="sideCard"></SideCard>
       <IndexTab slot="content"></IndexTab>
       <!-- <BottomNav slot="bottomNav"></BottomNav> -->

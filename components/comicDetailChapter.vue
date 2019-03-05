@@ -4,7 +4,7 @@
     <!-- <NavBar v-on:sendUser="msgFromNavBar"/> -->
     <ComicDetail v-bind:comicDetail="comicDetail"/>
     <v-layout justify-center>
-      <v-flex>
+      <v-flex class="chapterList">
         <v-card>
           <v-flex lg12 md12 xs12>
             <v-tabs slot="extension" v-model="model" grow icons-and-text>
@@ -115,10 +115,12 @@ export default {
     // console.log("会加载")
     this.$store.state.comicDetail = "";
     this.$store.state.dataLoading = true;
+    this.$store.state.readStart = true
     let data = await this.$spider({
       url: "/api" + this.$route.params.bookUrl + "/",
       type: "comic"
     });
+    this.$store.state.readStart = false
     this.$store.state.dataLoading = false;
     // console.log(this.$route.params.bookUrl);
     this.comicDetail = data.comicDetail;
@@ -205,6 +207,11 @@ export default {
 };
 </script>
 <style lang="css" scoped>
+@media only screen and (max-width: 1029px) {
+  .chapterList {
+    padding-bottom: 0px !important;
+  }
+}
 /* .comicToolBar {
   position: fixed !important;
   bottom: 0px;

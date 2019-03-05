@@ -1,8 +1,8 @@
 <template>
   <div class="pr-navbar">
     <v-navigation-drawer v-model="drawer" app temporary dense>
-      <v-list v-if="this.user">
-        <v-list-tile>
+      <v-list>
+        <v-list-tile v-if="this.user">
           <v-list-tile-action>
             <v-icon/>
           </v-list-tile-action>
@@ -19,10 +19,7 @@
             <v-list-tile-title>收藏</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>-->
-      </v-list>
-
-      <v-list v-else>
-        <v-list-tile @click="toLogin()">
+        <v-list-tile v-else @click="toLogin()">
           <v-list-tile-action>
             <v-icon/>
           </v-list-tile-action>
@@ -30,26 +27,18 @@
             <v-list-tile-title>登录</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-      </v-list>
 
-      <v-list>
         <v-divider/>
-        <!-- <v-list-tile @click="toSearch()">
+        <v-list-tile @click="toSearch()">
           <v-list-tile-action>
             <v-icon/>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>搜索</v-list-tile-title>
           </v-list-tile-content>
-        </v-list-tile>-->
-        <!-- <v-list-tile @click="toHistory()">
-          <v-list-tile-action>
-            <v-icon/>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>历史记录</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>-->
+        </v-list-tile>
+
+        <v-divider/>
         <v-list-tile @click="toAbout()">
           <v-list-tile-action>
             <v-icon/>
@@ -76,7 +65,7 @@
             <v-list-tile-title v-else>夜间模式</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-<v-divider/>
+        <v-divider/>
         <v-list-tile v-if="user" @click="exit()">
           <v-list-tile-action>
             <v-icon/>
@@ -88,7 +77,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-toolbar dense>
+    <v-toolbar color="#424242" dense>
       <v-toolbar-side-icon @click="drawer = !drawer"/>
       <v-btn flat @click="toHome()">
         <v-toolbar-title class="title">PRPRPR</v-toolbar-title>
@@ -118,12 +107,11 @@
       </v-toolbar-items>
       <v-menu :nudge-width="100" class="hidden-md-and-up">
         <v-toolbar-title slot="activator">
-          <span>All</span>
-          <v-icon color="black" dark>arrow_drop_down</v-icon>
+          <span>导航</span>
+          <v-icon>arrow_drop_down</v-icon>
         </v-toolbar-title>
 
         <v-list>
-      
           <v-list-tile @click="toHome()">
             <v-icon>home</v-icon>
             <v-list-tile-title>首页</v-list-tile-title>
@@ -288,7 +276,7 @@ export default {
   /* padding-bottom: 1rem !important; */
 }
 
-.v-breadcrumbs__item{
-  color:#424242
+.v-breadcrumbs__item {
+  color: #424242;
 }
 </style>

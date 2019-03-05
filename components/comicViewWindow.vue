@@ -16,11 +16,11 @@
       <v-icon slot="divider">forward</v-icon>
     </v-breadcrumbs>
     <Scroll>
-      <v-flex slot="scrollBtn" xs12 class="text-xs-center" @click="chapterPrev">
+      <v-flex slot="scrollBtn" xs12 class="text-xs-center">
         <v-alert
           v-if="prevWarning"
           :value="true"
-          color="warning"
+          color="secondary"
           transition="scale-transition"
         >这已经是第一章啦!</v-alert>
         <!-- <v-card dark color="primary">
@@ -29,6 +29,7 @@
         <v-btn
           v-else-if="!prevWarning"
           color="secondary"
+          @click="chapterPrev"
           block
           :loading="prevLoading"
           :disabled="prevLoading"
@@ -47,7 +48,7 @@
       />
     </v-touch>
 
-    <button class="testbtn" @click="getData()">{{this.chapterNoDelZero}}</button>
+    <button class="testbtn" @click="getData()">{{this.$store.state.page}}</button>
     <!-- <v-img
       v-for="item in imgList"
       :key="item.id"
@@ -62,7 +63,7 @@
         <v-alert
           v-if="nextWarning"
           :value="true"
-          color="warning"
+          color="secondary"
           transition="scale-transition"
         >这已经是最新一话啦!</v-alert>
         <!-- <v-card dark color="primary">
@@ -321,6 +322,7 @@ export default {
   //   }
   // },
   async created() {
+    this.$store.state.page = 7
     this.$store.state.chapterBtnDialog = false;
     window.scrollTo(0, 0);
     console.log("1");
@@ -331,16 +333,12 @@ export default {
       this.$route.params.chapterNo +
       ".html";
     let data = await this.getImg(url);
-    let black1 = document
-      .getElementsByClassName("v-breadcrumbs__item")[0]
-      .setAttribute("style", "color:#424242 !important");
-    let black2 = document
-      .getElementsByClassName("v-breadcrumbs__item")[1]
-      .setAttribute("style", "color:#424242 !important");
-    // let white2 = document.getElementsByClassName("v-breadcrumbs__item")[1];
-    // white2.setAttribute("style", "color:#424242 !important");
-    // this.bookTitle = data.bookTitle;
-    // this.chapterName = data.chapterName;
+    // let black1 = document
+    //   .getElementsByClassName("v-breadcrumbs__item")[0]
+    //   .setAttribute("style", "color:#424242 !important");
+    // let black2 = document
+    //   .getElementsByClassName("v-breadcrumbs__item")[1]
+    //   .setAttribute("style", "color:#424242 !important");
     this.content = data;
     this.setHistory(data);
   },
@@ -774,6 +772,8 @@ export default {
   /* right:0rem !important; */
   bottom: 2rem !important;
 }
+
+
 /* .v-breadcrumbs__item {
   color: black !important;
 } */

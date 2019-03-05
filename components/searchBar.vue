@@ -7,11 +7,11 @@
     solo
     append-icon="search"
     clearable
-    label="搜索"
+    label="搜索漫画,作者"
     :hint="'haha'"
-    @click:append="sendMessage"
-    @keyup.enter="sendMessage"
   />
+  <!-- @click:append="sendMessage"
+  @keyup.enter="sendMessage"-->
   <!-- </v-flex>
   </v-layout>-->
   <!-- </div> -->
@@ -22,47 +22,47 @@ export default {
   data() {
     return {
       searchText: "",
-      flag: false
+      flag: false,
+      timer: ""
     };
   },
-  // watch: {
-  //   searchText: function() {
-  //     let self = this
-  //     if (!self.flag) {
-  //       let count = 0
-  //       self.flag = true
-  //       setTimeout(() => {
-  //         self.$axios
-  //           .post('/users/search', {
-  //             url: 'http://www.57mh.com/search/q_' + self.searchText,
-  //             type: 'Search'
-  //           })
-  //           .then(searchResult => {
-  //             self.$store.commit('setSearchResult', searchResult.data.data)
-  //           })
-  //       }, 3000)
-  //     }
-  //   }
-  // },
-  methods: {
-    async sendMessage() {
-      console.log("搜索启动");
+  watch: {
+    searchText: function() {
       let self = this;
-      if (!self.flag) {
-        let count = 0;
-        self.flag = true;
+      clearTimeout(this.timer);
+
+      self.$store.state.dataLoading = false;
+      this.timer = setTimeout(async () => {
+        self.$store.state.dataLoading = true;
+        if (self.searchText == null) {
+          self.$store.state.dataLoading = false;
+          return false;
+        }
         let data = await self.$spider({
           url: "/api" + "/search/q_" + self.searchText,
           type: "search"
         });
-        console.log('搜素完成')
-        // this.$store.state.showIndexTab = false;
-        console.log(data);
         self.$store.commit("setSearchResult", data);
-  
-        this.$router.push("/search");
-      }
+        self.$store.state.dataLoading = false;
+        // self.$router.push("/search");
+      }, 2000);
     }
+  },
+  methods: {
+    // async sendMessage() {
+    //   console.log("搜索启动");
+    //   this.$store.state.dataLoading = true;
+    //   let data = await self.$spider({
+    //     url: "/api" + "/search/q_" + self.searchText,
+    //     type: "search"
+    //   });
+    //   console.log("搜素完成");
+    //   // this.$store.state.showIndexTab = false;
+    //   console.log(data);
+    //   self.$store.commit("setSearchResult", data);
+    //   this.$store.state.dataLoading = false;
+    //   this.$router.push("/search");
+    // }
   }
 };
 </script>

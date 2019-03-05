@@ -1,26 +1,6 @@
 <template>
   <v-container fluid class="text-xs-center">
-    <v-layout
-      flex
-      justify-space-between
-      row
-      wrap
-    >
-      <v-flex xs12>
-        <v-btn @click="show = !show">toggle</v-btn>
-      </v-flex>
-
-      <v-flex xs12 class="mt-5">
-        <v-tooltip v-model="show" top>
-          <template #activator="data">
-            <v-btn icon v-on="data.on">
-              <v-icon color="grey lighten-1">shopping_cart</v-icon>
-            </v-btn>
-          </template>
-          <span>Programmatic tooltip</span>
-        </v-tooltip>
-      </v-flex>
-    </v-layout>
+    <v-btn @click="stop"></v-btn>
   </v-container>
 </template>
 
@@ -28,9 +8,15 @@
 <script>
   export default {
     data () {
-      return {
-        show: false
+
+    },
+    methods:{
+      stop:function(){
+        clearTimeout(this.timerr)
       }
+    },
+    created(){
+      let timerr = setTimeout(function(){console.log('1111')},1000)
     }
   }
 </script>
