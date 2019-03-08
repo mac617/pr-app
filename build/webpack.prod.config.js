@@ -7,7 +7,7 @@ module.exports = merge(baseWebpackConfig, {
   mode: "production",
   output: {
     path: path.resolve(__dirname, "../dist"),
-    publicPath: "./"
+    publicPath: "/"
   },
   module: {
     rules: [

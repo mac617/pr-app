@@ -7,13 +7,50 @@
 
 <template>
   <div class="pr-comicViewWindow">
+    <v-layout row justify-center>
+
+      <v-dialog
+        v-model="$store.state.chapterBtnDialog"
+        fullscreen
+        hide-overlay
+        transition="dialog-bottom-transition"
+        lazy
+      >
+        <v-card>
+          <v-toolbar dark>
+            <v-btn icon dark @click.stop="$store.state.chapterBtnDialog= false">
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+            <v-toolbar-title>目录</v-toolbar-title>
+            <v-spacer></v-spacer>
+          </v-toolbar>
+          <ChapterList/>
+          <!-- <v-list three-line subheader>
+            <v-subheader>User Controls</v-subheader>
+            <v-list-tile avatar>
+              <v-list-tile-content>
+                <v-list-tile-title>Content filtering</v-list-tile-title>
+                <v-list-tile-sub-title>Set the content filtering level to restrict apps that can be downloaded</v-list-tile-sub-title>
+              </v-list-tile-content>
+            </v-list-tile>
+            <v-list-tile avatar>
+              <v-list-tile-content>
+                <v-list-tile-title>Password</v-list-tile-title>
+                <v-list-tile-sub-title>Require password for purchase or use password to restrict purchase</v-list-tile-sub-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </v-list>-->
+          <v-divider></v-divider>
+        </v-card>
+      </v-dialog>
+    </v-layout>
     <!-- {{bookTitle}} -->
     <v-breadcrumbs
       v-if="this.$vuetify.breakpoint.smAndUp&&this.breadOnOff"
       :items="breads"
       class="justify-center"
     >
-      <v-icon slot="divider">forward</v-icon>
+      <v-icon slot="divider">mdi-forward</v-icon>
     </v-breadcrumbs>
     <Scroll>
       <v-flex slot="scrollBtn" xs12 class="text-xs-center">
@@ -38,17 +75,33 @@
     </Scroll>
 
     <v-touch @tap="phOnTouch">
-      <v-img
+      <!-- <v-img
         :class="{'comicImg':$vuetify.breakpoint.smAndUp}"
         v-for="(item,index) in viewList"
         ref="dataNum"
         :key="index"
         :lazy-src="require('../src/assets/imgs/logo.png')"
         :src="item"
-      />
+      />-->
+      <!-- :lazy-src="require('../src/assets/imgs/3c3c3c.png')" -->
+      <v-img
+        @load="imgOnLoad(item)"
+        :class="{'comicImg':$vuetify.breakpoint.smAndUp,'bgDark':$store.state.dark,'bgLight':!$store.state.dark,'borderSwitch':!item.progress}"
+        v-for="(item,index) in viewList"
+        ref="dataNum"
+        :key="index"
+        :src="item.imgUrl"
+        :lazy-src="$store.state.dark?'require(`../src/assets/imgs/3c3c3c.png`)':'require(`../src/assets/imgs/edecea.png`)'"
+      >
+        <center :class="item.progress?'middle':'hidden middle'">
+          <div :class="$vuetify.breakpoint.smAndUp?'display-4':'display-3'">{{index + 1}}</div>
+          <v-progress-circular :indeterminate="item.progress" :size="50" color="orange"></v-progress-circular>
+        </center>
+      </v-img>
     </v-touch>
 
-    <button class="testbtn" @click="getData()">{{this.$store.state.page}}</button>
+    <!-- 测试button -->
+    <!-- <button class="testbtn" @click="getData()">{{'comicViewBtnFlag' + this.$store.state.comicViewBtnFlag}}{{'comicViewBtnFlag' + this.$store.state.comicViewBtnFlag}}</button> -->
     <!-- <v-img
       v-for="item in imgList"
       :key="item.id"
@@ -81,21 +134,23 @@
     <v-scale-transition>
       <ComicViewBtn
         class="move"
-        v-if="this.$store.state.comicViewBtnFlag&&this.newHistory"
-        @toNext="chapterNext"
-        @toPrev="chapterPrev"
-        :newHistory="this.newHistory"
+        v-if="this.$store.state.comicViewBtnFlag"
       />
+      <!-- &&this.newHistory -->
+      <!-- :newHistory="this.newHistory" -->
+      <!-- @toNext="chapterNext" -->
+        <!-- @toPrev="chapterPrev" -->
     </v-scale-transition>
   </div>
 </template>
 
 <script>
+import ChapterList from "@/chapterList.vue";
 import Scroll from "@/scroll.vue";
 import ComicViewBtn from "@/comicViewBtn.vue";
 import { setTimeout } from "timers";
 export default {
-  components: { ComicViewBtn, Scroll },
+  components: { ComicViewBtn, Scroll,ChapterList },
   data() {
     return {
       content: "",
@@ -321,8 +376,13 @@ export default {
   //   }
   // },
   async created() {
+    console.log(
+      navigator.connection ||
+        navigator.mozConnection ||
+        navigator.webkitConnection
+    );
     this.$store.state.page = 7;
-    this.$store.state.chapterBtnDialog = false;
+    // this.$store.state.chapterBtnDialog = false;
     window.scrollTo(0, 0);
     console.log("1");
     let url =
@@ -334,12 +394,14 @@ export default {
     let data = await this.getImg(url);
     this.content = data;
     this.setHistory(data);
-    let black1 = document
-      .getElementsByClassName("v-breadcrumbs__item")[0]
-      .setAttribute("style", "color:#424242 !important");
-    let black2 = document
-      .getElementsByClassName("v-breadcrumbs__item")[1]
-      .setAttribute("style", "color:#424242 !important");
+    let black1 = document.getElementsByClassName("v-breadcrumbs__item")[0];
+    if (black1) {
+      black1.setAttribute("style", "color:#424242 !important");
+    }
+    let black2 = document.getElementsByClassName("v-breadcrumbs__item")[1];
+    if (black2) {
+      black2.setAttribute("style", "color:#424242 !important");
+    }
   },
   methods: {
     async pull() {
@@ -354,7 +416,8 @@ export default {
         //     imgDoms[this.num].$el.offsetTop+imgDoms[this.num].$el.clientHeight
         // );
         console.log(this.num);
-
+        console.log(window.screen.availHeight + window.pageYOffset);
+        console.log(imgDoms[3].$el.offsetTop + imgDoms[3].$el.clientHeight);
         if (this.num < this.imgList.length - 1) {
           if (
             window.screen.availHeight + window.pageYOffset >
@@ -390,8 +453,14 @@ export default {
         //   this.$store.state.num--;
         // }
 
-        //懒加载图片
-        if (window.pageYOffset > (document.body.scrollHeight * 3) / 5) {
+        //懒加载图片 旧:测试了一下,不合适
+        // if (window.pageYOffset > (document.body.scrollHeight * 3) / 5) {
+        //   // if (this.num !== this.comicLength) {
+        //   this.$store.state.page += 7;
+        //   // }
+        // }
+
+        if (this.num + 1 == this.$store.state.page - 2) {
           // if (this.num !== this.comicLength) {
           this.$store.state.page += 7;
           // }
@@ -478,6 +547,12 @@ export default {
       let data = await this.$spider({
         url: url,
         type: "comicView"
+      });
+      data.comicViewImg = data.comicViewImg.map(function(item) {
+        let imgAndProgress = {};
+        imgAndProgress.imgUrl = item;
+        imgAndProgress.progress = true;
+        return imgAndProgress;
       });
       this.$store.state.dataLoading = false;
       this.$set(this.breads[1], "text", data.bookTitle);
@@ -725,8 +800,8 @@ export default {
           this.btnFlag = false;
           self.$store.state.fab = false;
           setTimeout(function() {
-            self.$store.state.comicViewBtnFlag = false;
             self.btnFlag = true;
+            self.$store.state.comicViewBtnFlag = false;
           }, 300);
 
           console.log("下滑");
@@ -736,6 +811,9 @@ export default {
           console.log("上滑");
         }
       }
+    },
+    imgOnLoad(item) {
+      item.progress = false;
     }
   }
 };
@@ -748,6 +826,7 @@ export default {
   z-index: 20;
   bottom: 200px;
   left: 50px;
+  color:red
 }
 
 .countPage {
@@ -779,6 +858,35 @@ export default {
   color: black;
 }
 
+.hidden {
+  display: none;
+}
+
+.middle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.bgDark {
+  background-color: #3c3c3c;
+  border: #fff solid 1px;
+}
+
+.bgLight {
+  background-color: #edecea;
+  border: #d5d4d3 solid 1px;
+}
+
+.borderSwitch {
+  border: 0px !important;
+}
+/* .pr-comicViewWindow{
+  background-color: #edecea;
+} */
 /* .v-breadcrumbs__item {
   color: black !important;
 } */

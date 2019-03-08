@@ -2,85 +2,93 @@
   <!-- <v-container fluid>
         <v-layout row wrap justify-center>
   <v-flex lg10 xs11>-->
-  <v-layout row wrap justify-center>
-    <v-flex lg4 xs4>
-      <!-- {{coutry}} -->
-      <v-select
-        v-model="coutry"
-        :items="coutryList"
-        item-text="state"
-        item-value="abbr"
-        return-object
-        solo
-        label="地区"
-      ></v-select>
-    </v-flex>
+  <div class="prCategorySelect">
+    <v-layout row wrap justify-center>
+      <v-flex lg4 xs4>
+        <!-- {{coutry}} -->
+        <v-select
+          v-model="coutry"
+          :items="coutryList"
+          item-text="state"
+          item-value="abbr"
+          return-object
+          color="orange"
+          solo
+          label="地区"
+        ></v-select>
+      </v-flex>
 
-    <v-flex lg4 xs4>
-      <!-- {{category}} -->
-      <v-select
-        v-model="category"
-        :items="categoryList"
-        item-text="state"
-        item-value="abbr"
-        return-object
-        solo
-        label="剧情"
-      ></v-select>
-    </v-flex>
+      <v-flex lg4 xs4>
+        <!-- {{category}} -->
+        <v-select
+          v-model="category"
+          :items="categoryList"
+          item-text="state"
+          item-value="abbr"
+          color="orange"
+          return-object
+          solo
+          label="剧情"
+        ></v-select>
+      </v-flex>
 
-    <v-flex lg4 xs4>
-      <!-- {{year}} -->
-      <v-select
-        v-model="year"
-        :items="yearList"
-        item-text="state"
-        item-value="abbr"
-        return-object
-        solo
-        label="年份"
-      ></v-select>
-    </v-flex>
+      <v-flex lg4 xs4>
+        <!-- {{year}} -->
+        <v-select
+          v-model="year"
+          :items="yearList"
+          item-text="state"
+          item-value="abbr"
+          color="orange"
+          return-object
+          solo
+          label="年份"
+        ></v-select>
+      </v-flex>
 
-    <v-flex lg4 xs4>
-      <!-- {{letter}} -->
-      <v-select
-        v-model="letter"
-        :items="letterList"
-        item-text="state"
-        item-value="abbr"
-        return-object
-        solo
-        label="字母"
-      ></v-select>
-    </v-flex>
+      <v-flex lg4 xs4>
+        <!-- {{letter}} -->
+        <v-select
+          v-model="letter"
+          :items="letterList"
+          item-text="state"
+          item-value="abbr"
+          color="orange"
+          return-object
+          solo
+          label="字母"
+        ></v-select>
+      </v-flex>
 
-    <v-flex lg4 xs4>
-      <!-- {{status}} -->
-      <v-select
-        v-model="status"
-        :items="statusList"
-        item-text="state"
-        item-value="abbr"
-        return-object
-        solo
-        label="进度"
-      ></v-select>
-    </v-flex>
+      <v-flex lg4 xs4>
+        <!-- {{status}} -->
+        <v-select
+          v-model="status"
+          :items="statusList"
+          item-text="state"
+          item-value="abbr"
+          return-object
+          color="orange"
+          solo
+          label="进度"
+        ></v-select>
+      </v-flex>
 
-    <v-flex lg4 xs4>
-      <!-- {{order}} -->
-      <v-select
-        v-model="order"
-        :items="orderList"
-        item-text="state"
-        item-value="abbr"
-        return-object
-        solo
-        label="排序"
-      ></v-select>
-    </v-flex>
-  </v-layout>
+      <v-flex lg4 xs4>
+        <!-- {{order}} -->
+        <v-select
+          v-model="order"
+          :items="orderList"
+          item-text="state"
+          item-value="abbr"
+          return-object
+          color="orange"
+          solo
+          label="排序"
+        ></v-select>
+      </v-flex>
+    </v-layout>
+  </div>
   <!-- </v-card>
           </v-flex>
         </v-layout>
@@ -282,5 +290,9 @@ export default {
 <style>
 .v-text-field__details {
   display: none !important;
+}
+
+.prCategorySelect {
+  margin-top: 1rem !important;
 }
 </style>

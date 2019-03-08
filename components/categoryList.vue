@@ -43,8 +43,8 @@
                 <!-- <v-spacer/> -->
                 <v-rating
                   v-model="item.bookScore"
-                  background-color="black"
-                  color="yellow accent-4"
+                  background-color="orange"
+                  color="orange"
                   dense
                   half-increments
                   size="21"

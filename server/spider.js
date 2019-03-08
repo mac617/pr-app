@@ -118,7 +118,7 @@ let spider = function({ url, type }) {
           b.bookScore = Number(
             $(e)
               .find(".updateon em")
-              .text()
+              .text() / 2
           );
           content.push(b);
         });

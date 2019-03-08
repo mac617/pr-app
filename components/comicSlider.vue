@@ -6,7 +6,7 @@
       dark
       icons-and-text
     >
-      <v-tabs-slider color="yellow" />
+      <v-tabs-slider color="orange" />
 
       <v-tab href="#tab-1">
         Recents

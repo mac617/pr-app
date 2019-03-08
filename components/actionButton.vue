@@ -18,7 +18,7 @@
         fab
       >
         <v-icon>account_circle</v-icon>
-        <v-icon>close</v-icon>
+        <v-icon>mdi-close</v-icon>
       </v-btn>
       <v-btn
         fab

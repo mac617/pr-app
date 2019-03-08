@@ -1,7 +1,7 @@
 <template>
 <v-container style="max-width: 600px;">
   <v-timeline dense>
-    <v-timeline-item icon="library_books" fill-dot color="#424242">
+    <v-timeline-item icon="mdi-library-books" fill-dot color="#424242">
       <v-layout pt-3>
         <v-flex lg8 md10>
           <strong>你没看过的船新版本</strong>

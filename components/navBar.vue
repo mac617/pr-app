@@ -2,10 +2,10 @@
   <div class="pr-navbar">
     <v-navigation-drawer v-model="drawer" app temporary dense>
       <v-list>
-        <v-list-tile v-if="this.user">
-          <v-list-tile-action>
-            <v-icon/>
-          </v-list-tile-action>
+        <v-list-tile avatar v-if="this.user">
+          <v-list-tile-avatar>
+            <v-icon>mdi-account</v-icon>
+          </v-list-tile-avatar>
           <v-list-tile-content>
             <v-list-tile-title>{{ this.user }}</v-list-tile-title>
           </v-list-tile-content>
@@ -19,59 +19,61 @@
             <v-list-tile-title>收藏</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>-->
-        <v-list-tile v-else @click="toLogin()">
-          <v-list-tile-action>
-            <v-icon/>
-          </v-list-tile-action>
+        <v-list-tile avatar v-else @click="toLogin()">
+          <v-list-tile-avatar>
+            <v-icon>mdi-login</v-icon>
+          </v-list-tile-avatar>
           <v-list-tile-content>
             <v-list-tile-title>登录</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
 
         <v-divider/>
-        <v-list-tile @click="toSearch()">
-          <v-list-tile-action>
-            <v-icon/>
-          </v-list-tile-action>
+        <v-list-tile avatar @click="toSearch()">
+          <v-list-tile-avatar>
+            <v-icon>mdi-magnify</v-icon>
+          </v-list-tile-avatar>
           <v-list-tile-content>
             <v-list-tile-title>搜索</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
 
         <v-divider/>
-        <v-list-tile @click="toAbout()">
-          <v-list-tile-action>
-            <v-icon/>
-          </v-list-tile-action>
+        <v-list-tile avatar @click="toAbout()">
+          <v-list-tile-avatar>
+            <v-icon>mdi-information</v-icon>
+          </v-list-tile-avatar>
           <v-list-tile-content>
             <v-list-tile-title>关于本站</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click="toDevLop()">
-          <v-list-tile-action>
-            <v-icon/>
-          </v-list-tile-action>
+        <v-list-tile avatar @click="toDevLop()">
+          <v-list-tile-avatar>
+            <v-icon>mdi-library-books</v-icon>
+          </v-list-tile-avatar>
           <v-list-tile-content>
             <v-list-tile-title>开发日志</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
         <v-divider/>
-        <v-list-tile @click="darkMode()">
-          <v-list-tile-action>
-            <v-icon/>
-          </v-list-tile-action>
+        <v-list-tile avatar @click="darkMode()">
+          <v-list-tile-avatar>
+            <v-icon>mdi-theme-light-dark</v-icon>
+          </v-list-tile-avatar>
           <v-list-tile-content>
             <v-list-tile-title v-if="this.$store.state.dark">日间模式</v-list-tile-title>
             <v-list-tile-title v-else>夜间模式</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
         <v-divider/>
-        <v-list-tile v-if="user" @click="exit()">
-          <v-list-tile-action>
-            <v-icon/>
-          </v-list-tile-action>
+        <v-list-tile avatar v-if="user" @click="exit()">
+          <v-list-tile-avatar>
+            <v-icon>mdi-exit-to-app</v-icon>
+          </v-list-tile-avatar>
           <v-list-tile-content>
-            <v-list-tile-title>退出</v-list-tile-title>
+            <v-list-tile-title>
+              退出
+            </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -96,32 +98,32 @@
       </VBtn>-->
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn flat @click="toHome()" color="#fff">
-          <v-icon>home</v-icon>首页
+          <v-icon>mdi-home</v-icon>首页
         </v-btn>
         <v-btn flat @click="toHistory()" color="#fff">
-          <v-icon>history</v-icon>收藏/历史
+          <v-icon>mdi-history</v-icon>收藏/历史
         </v-btn>
         <v-btn flat @click="toCategory()" color="#fff">
-          <v-icon>category</v-icon>分区
+          <v-icon>mdi-shape</v-icon>分区
         </v-btn>
       </v-toolbar-items>
       <v-menu :nudge-width="100" class="hidden-md-and-up" dark>
         <v-toolbar-title slot="activator">
           <span class="white--text">导航</span>
-          <v-icon>arrow_drop_down</v-icon>
+          <v-icon color="white">mdi-menu-down</v-icon>
         </v-toolbar-title>
 
         <v-list>
           <v-list-tile @click="toHome()">
-            <v-icon>home</v-icon>
+            <v-icon>mdi-home</v-icon>
             <v-list-tile-title>首页</v-list-tile-title>
           </v-list-tile>
           <v-list-tile @click="toHistory()">
-            <v-icon>history</v-icon>
+            <v-icon>mdi-history</v-icon>
             <v-list-tile-title>收藏/历史</v-list-tile-title>
           </v-list-tile>
           <v-list-tile @click="toCategory()">
-            <v-icon>category</v-icon>
+            <v-icon>mdi-shape</v-icon>
             <v-list-tile-title>分区</v-list-tile-title>
           </v-list-tile>
         </v-list>
@@ -133,12 +135,11 @@
         </v-flex>
       </v-layout>-->
       <!-- <v-container> -->
+        <v-spacer></v-spacer>
       <v-layout justify-end v-if="switch1OnOff">
-        <VIcon
-          style="vertical-align: middle"
-          :color="this.$store.state.switch1?'yellow darken-3':'white'"
-        >format_line_spacing</VIcon>
-        <v-switch v-model="$store.state.switch1" color="yellow darken-3" hide-details></v-switch>
+        <v-icon style="vertical-align: middle" :color="$store.state.switch1?'orange':'white'">mdi-wifi</v-icon>
+
+        <v-switch v-model="$store.state.switch1" color="orange" hide-details></v-switch>
         <!-- </v-container> -->
       </v-layout>
     </v-toolbar>
@@ -286,7 +287,7 @@ export default {
   color: #424242;
 }
 
-.v-icon {
+.v-btn__content i {
   color: #fff !important;
 }
 </style>

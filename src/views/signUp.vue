@@ -2,7 +2,7 @@
   <div class="pr-login">
     <!-- <NavBar/> -->
     <v-layout justify-center>
-      <v-flex xs10>
+      <v-flex lg6 md7 xs10>
         <v-card>
           <v-card-title class="headline" primary-title>
             <v-spacer></v-spacer>注册
@@ -20,14 +20,14 @@
                   />
                   <v-text-field
                     v-model="password"
-                    :append-icon="show ? 'visibility_off' : 'visibility'"
+                    :append-icon="show ? 'mdi-eye-off' : 'mdi-eye'"
                     :rules="[rules.required, rules.password]"
                     :type="show ? 'text' : 'password'"
                     label="密码"
                     @click:append="show = !show"
                   />
                   <v-text-field
-                    :append-icon="show ? 'visibility_off' : 'visibility'"
+                    :append-icon="show ? 'mdi-eye-off' : 'mdi-eye'"
                     :rules="[rules.required, rules.password, rules.passwordMatch]"
                     :type="show ? 'text' : 'password'"
                     value

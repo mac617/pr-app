@@ -5,7 +5,7 @@
   <v-text-field
     v-model="searchText"
     solo
-    append-icon="search"
+    append-icon="mdi-magnify"
     clearable
     label="搜索漫画,作者"
     :hint="'haha'"

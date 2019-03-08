@@ -1,5 +1,5 @@
 <template>
-  <div class="pr-comicLayout">
+  <div>
     <slot name="navBar"></slot>
     <v-container>
       <v-layout justify-center>
@@ -19,12 +19,8 @@ export default {
   }
 };
 </script>
-<style lang="css">
-.comicImg {
-  margin: 10px auto 40px;
-  box-shadow: 1px 1px 6px 0px #333 !important;
-}
-.container{
-  padding:0px !important
+<style lang="css" scoped>
+.container {
+  padding: 0px !important;
 }
 </style>

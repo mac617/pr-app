@@ -7,13 +7,13 @@ import SignUp from "./views/signUp.vue";
 import Collect from "./views/collect.vue";
 import History from "./views/history.vue";
 import Category from "./views/category.vue";
-import Test2 from "./views/test2.vue";
-import Test3 from "./views/test3.vue";
-import Test from "./views/test.vue";
-import DevLop from './views/devLog.vue'
-import About from './views/about.vue'
+// import Test2 from "./views/test2.vue";
+// import Test3 from "./views/test3.vue";
+import DevLop from "./views/devLog.vue";
+import About from "./views/about.vue";
+import notFound from "./views/notFound.vue";
 export default {
-  // mode: "history",
+  mode: "history",
   routes: [
     {
       path: "/",
@@ -58,7 +58,8 @@ export default {
     {
       path: "/about",
       component: About
-    }
+    },
+    { path: "*", component: notFound }
     // {
     //   path: "/test2",
     //   component: Test2
@@ -67,9 +68,5 @@ export default {
     //   path: "/test3",
     //   component: Test3
     // },
-    // {
-    //   path: "/test",
-    //   component: Test
-    // }
   ]
 };

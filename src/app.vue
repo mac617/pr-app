@@ -11,7 +11,7 @@
   <v-app :dark="dark">
     <v-progress-linear
       class="progress"
-      color="pink"
+      color="orange"
       height="2"
       v-if="this.$store.state.dataLoading"
       :indeterminate="this.$store.state.dataLoading"

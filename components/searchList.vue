@@ -74,8 +74,8 @@
                     <!-- <v-spacer/> -->
                     <v-rating
                       v-model="item.bookScore"
-                      background-color="white"
-                      color="yellow accent-4"
+                      background-color="orange"
+                      color="orange"
                       dense
                       half-increments
                       hover

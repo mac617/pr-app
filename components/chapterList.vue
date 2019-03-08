@@ -8,11 +8,11 @@
         prev-icon="mdi-arrow-left-bold-box-outline"
         show-arrows
       >
-        <!-- <v-tabs-slider color="yellow"/> -->
-        <v-tab v-for="i in chapterPageNum" :key="i" :href="'#tab-' + i">Page{{ i }}</v-tab>
+        <v-tabs-slider color="orange"/>
+        <v-tab v-for="i in chapterPageNum" :key="i" :href="'#tab-' + i">第{{ i }}页</v-tab>
 
         <v-tabs-items>
-          <v-tab-item v-for="v in chapterPageNum" :key="v" :value="'tab-' + v">
+          <v-tab-item v-for="v in chapterPageNum" :key="v" :value="'tab-' + v" lazy>
             <v-card flat>
               <v-card-text>
                 <v-container grid-list-md text-xs-center>
@@ -97,7 +97,7 @@ export default {
       this.$store.state.num = 0;
       this.$store.state.page = 7;
       window.scrollTo(0, 0);
-      this.$store.state.chapterBtnDialog = !this.$store.state.chapterBtnDialog;
+      this.$store.state.chapterBtnDialog = false;
       if (this.$route.path.includes("comic/")) {
         let storage = window.localStorage;
         let content = [];

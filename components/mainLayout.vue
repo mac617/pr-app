@@ -3,7 +3,7 @@
     <!-- <v-container grid-list-md> -->
     <v-layout row wrap justify-center>
       <!-- style="margin-bottom:0.3rem" -->
-      <v-flex lg7 md9 sm10 xs12 class="mainContent">
+      <v-flex lg6 md9 sm10 xs12 class="mainContent">
         <slot name="searchBar"></slot>
         <v-card class="contentCard">
           <!-- <slot name="searchBar"></slot> -->
@@ -11,7 +11,7 @@
         </v-card>
         <!-- <IndexTab/> -->
       </v-flex>
-      <v-flex lg4 md9 sm10 xs12 class="sideCard">
+      <v-flex lg3 md9 sm10 xs12 class="sideCard">
         <slot name="sideCard"></slot>
       </v-flex>
     </v-layout>

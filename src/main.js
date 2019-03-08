@@ -6,7 +6,7 @@ import routerConfig from "./router";
 import Axios from "axios";
 import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
-import "material-design-icons-iconfont/dist/material-design-icons.css";
+// import "material-design-icons-iconfont/dist/material-design-icons.css";
 import store from "./store";
 import Spider from "../server/spider";
 import "@mdi/font/css/materialdesignicons.css";
@@ -21,7 +21,7 @@ Vue.prototype.$spider = Spider;
 Vue.use(Vuex);
 // Axios.defaults.baseURL = '/api'
 Vue.use(Vuetify, {
-  iconfont: "md,mdi"
+  iconfont: "mdi"
 });
 Vue.use(VueRouter);
 const router = new VueRouter(routerConfig);

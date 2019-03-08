@@ -4,10 +4,10 @@
       <v-layout justify-center ma-0>
         <v-flex>
           <v-tabs max fixed-tabs slot="extension" v-model="model">
+            <v-tabs-slider color="orange"/>
             <v-tab class="font-weight-bold title" :href="`#tab-${1}`">收藏</v-tab>
             <v-tab class="font-weight-bold title" :href="`#tab-${2}`">历史</v-tab>
           </v-tabs>
-
           <v-tabs-items v-model="model">
             <v-tab-item lazy :value="`tab-${1}`">
               <v-card flat>

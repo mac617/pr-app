@@ -8,11 +8,12 @@
         <v-card>
           <v-flex lg12 md12 xs12>
             <v-tabs slot="extension" v-model="model" grow icons-and-text>
+              <v-tabs-slider color="orange"/>
               <v-tab :href="`#tab-` + 1">简介
-                <v-icon>details</v-icon>
+                <v-icon>mdi-details</v-icon>
               </v-tab>
               <v-tab :href="`#tab-` + 2">章节
-                <v-icon>library_books</v-icon>
+                <v-icon>mdi-library-books</v-icon>
               </v-tab>
               <!-- <v-tab :href="`#tab-` + 3">Nearby
             <v-icon>account_box</v-icon>

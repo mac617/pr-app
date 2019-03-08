@@ -18,54 +18,24 @@
       fab
       :large="this.$vuetify.breakpoint.mdAndUp"
     >
-      <v-icon>account_circle</v-icon>
-      <v-icon>close</v-icon>
+      <v-icon @click.stop="getCollect()">mdi-toolbox</v-icon>
+      <v-icon>mdi-close</v-icon>
+    </v-btn>
+    <v-btn
+      @click.stop="$store.state.chapterBtnDialog= true"
+      :small="this.$vuetify.breakpoint.smAndDown"
+      fab
+      dark
+    >
+      <v-icon>mdi-format-align-justify</v-icon>
     </v-btn>
     <!-- <v-btn fab dark small color="green">
       <v-icon>edit</v-icon>
     </v-btn>-->
-    <v-layout row justify-center>
-      <v-dialog
-        v-model="$store.state.chapterBtnDialog"
-        fullscreen
-        hide-overlay
-        transition="dialog-bottom-transition"
-      >
-        <v-btn slot="activator" :small="this.$vuetify.breakpoint.smAndDown" fab dark>
-          <v-icon>format_align_justify</v-icon>
-        </v-btn>
-        <v-card>
-          <v-toolbar dark>
-            <v-btn icon dark @click="$store.state.chapterBtnDialog= !$store.state.chapterBtnDialog">
-              <v-icon>close</v-icon>
-            </v-btn>
-            <v-toolbar-title>目录</v-toolbar-title>
-            <v-spacer></v-spacer>
-          </v-toolbar>
-          <ChapterList/>
-          <!-- <v-list three-line subheader>
-            <v-subheader>User Controls</v-subheader>
-            <v-list-tile avatar>
-              <v-list-tile-content>
-                <v-list-tile-title>Content filtering</v-list-tile-title>
-                <v-list-tile-sub-title>Set the content filtering level to restrict apps that can be downloaded</v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-list-tile>
-            <v-list-tile avatar>
-              <v-list-tile-content>
-                <v-list-tile-title>Password</v-list-tile-title>
-                <v-list-tile-sub-title>Require password for purchase or use password to restrict purchase</v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-list-tile>
-          </v-list>-->
-          <v-divider></v-divider>
-        </v-card>
-      </v-dialog>
-    </v-layout>
     <div class="hidden-xs-and-up">
       <Scroll>
         <v-btn slot="scrollBtn" fab dark :small="this.$vuetify.breakpoint.smAndDown">
-          <v-icon dark>vertical_align_top</v-icon>
+          <v-icon dark>mdi-format-vertical-align-top</v-icon>
         </v-btn>
       </Scroll>
 
@@ -76,7 +46,7 @@
         dark
         :small="this.$vuetify.breakpoint.smAndDown"
       >
-        <v-icon color="yellow darken-3">favorite</v-icon>
+        <v-icon color="orange">mdi-star-face</v-icon>
       </v-btn>
 
       <v-btn
@@ -86,7 +56,7 @@
         dark
         :small="this.$vuetify.breakpoint.smAndDown"
       >
-        <v-icon color="white">favorite</v-icon>
+        <v-icon color="white">mdi-star-face</v-icon>
       </v-btn>
 
       <v-btn
@@ -96,7 +66,7 @@
         :small="this.$vuetify.breakpoint.smAndDown"
         @click.stop="autoMode()"
       >
-        <v-icon color="yellow darken-3">format_line_spacing</v-icon>
+        <v-icon color="orange">mdi-wifi</v-icon>
       </v-btn>
       <v-btn
         v-else-if="!this.$store.state.switch1"
@@ -105,7 +75,7 @@
         :small="this.$vuetify.breakpoint.smAndDown"
         @click.stop="autoMode()"
       >
-        <v-icon color="white">format_line_spacing</v-icon>
+        <v-icon color="white">mdi-wifi</v-icon>
       </v-btn>
 
       <!-- <v-btn fab dark :small="this.$vuetify.breakpoint.smAndDown">
@@ -152,17 +122,11 @@
 </template>
 
 <script>
-import ChapterList from "@/chapterList.vue";
 import Scroll from "@/scroll.vue";
 export default {
-  props: ["newHistory"],
+  // props: ["newHistory"],
   components: {
-    ChapterList,
     Scroll
-  },
-  created() {
-    // console.log(this.newHistory);
-    this.$store.state.chapterBtnDialog = false;
   },
   data: () => ({
     direction: "top",
@@ -207,9 +171,6 @@ export default {
     username: function() {
       return this.$store.state.user;
     },
-    dialog: function() {
-      return this.$store.state.chapterBtnDialog;
-    },
     activeFab() {
       switch (this.tabs) {
         case "one":
@@ -239,8 +200,9 @@ export default {
     }
   },
   created() {
+    this.$store.state.chapterBtnDialog = false;
     this.getHistory();
-    this.getCollect();
+    // this.getCollect();
   },
   methods: {
     autoMode() {
@@ -280,6 +242,7 @@ export default {
       if (!this.username.length) {
         return false;
       }
+
       let username = this.username;
 
       const { status, data } = await this.$axios.post(
@@ -349,7 +312,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang='css' scoped>
 .material-icons {
   display: flex !important;
 }

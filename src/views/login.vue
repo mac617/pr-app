@@ -2,7 +2,7 @@
   <div class="pr-login">
     <!-- <NavBar/> -->
     <v-layout justify-center>
-      <v-flex lg5 md12>
+      <v-flex lg5 md6 sm7>
         <v-card>
           <v-card-title>登录</v-card-title>
           
@@ -16,7 +16,7 @@
               />
               <v-text-field
                 v-model="password"
-                :append-icon="show ? 'visibility_off' : 'visibility'"
+                :append-icon="show ? 'mdi-eye-off' : 'mdi-eye'"
                 :rules="[rules.required, rules.min]"
                 :type="show ? 'text' : 'password'"
                 name="input-10-1"
@@ -24,9 +24,9 @@
                 hint="最少6个字符"
                 @click:append="show = !show"
               />
-              <center>
-                <v-btn :disabled="!valid" @click="submit">登录</v-btn>
-                <v-btn to="signUp">注册</v-btn>
+              <center style="padding:1rem">
+                <v-btn :disabled="!valid" @click="submit"><v-icon>mdi-login</v-icon>登录</v-btn>
+                <v-btn to="signUp"><v-icon>mdi-account-plus</v-icon>注册</v-btn>
               </center>
             </v-form>
             

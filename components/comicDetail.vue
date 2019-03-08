@@ -68,7 +68,7 @@
                 v-if="checkCollectList"
                 @click.stop="delCollect()"
               >
-                <v-icon left color="yellow darken-3">favorite</v-icon>收藏
+                <v-icon left color="orange">mdi-star-face</v-icon>收藏
               </v-btn>
               <v-btn
                 :disabled="this.$store.state.readStart"
@@ -78,7 +78,7 @@
                 v-else-if="!checkCollectList"
                 @click.stop="addCollect()"
               >
-                <v-icon left color="white">favorite</v-icon>收藏
+                <v-icon left color="white">mdi-star-face</v-icon>收藏
               </v-btn>
 
               <v-btn

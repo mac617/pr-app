@@ -3,6 +3,7 @@
     <v-layout justify-center>
       <v-flex style="padding-top:0">
         <v-tabs slot="extension" v-model="model" centered fixed-tabs>
+          <v-tabs-slider color="orange"/>
           <v-tab class="font-weight-bold subheading" :href="`#tab-${1}`">热门连载</v-tab>
           <v-tab class="font-weight-bold subheading" :href="`#tab-${2}`">经典完结</v-tab>
           <v-tab class="font-weight-bold subheading" :href="`#tab-${3}`">最新上架</v-tab>

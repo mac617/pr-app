@@ -2,45 +2,57 @@
   <div class="indexComic">
     <v-layout justify-center>
       <v-flex>
-        <v-tabs max fixed-tabs slot="extension" v-model="model">
-          <v-tab class="font-weight-bold title" :href="`#tab-${1}`">爱情/治愈</v-tab>
-          <v-tab class="font-weight-bold title" :href="`#tab-${2}`">热血/校园</v-tab>
-          <v-tab class="font-weight-bold title" :href="`#tab-${3}`">竞技/体育</v-tab>
-          <v-tab class="font-weight-bold title" :href="`#tab-${4}`">武侠/格斗</v-tab>
+        <v-tabs
+          grow
+          slot="extension"
+          v-model="model"
+          show-arrows
+          next-icon="mdi-arrow-right-bold-box-outline"
+          prev-icon="mdi-arrow-left-bold-box-outline"
+        >
+          <v-tabs-slider color="orange"/>
+          <!-- <v-tab class="font-weight-bold title" :href="`#tab-${1}`">1</v-tab>
+          <v-tab class="font-weight-bold title" :href="`#tab-${2}`">2</v-tab>
+          <v-tab class="font-weight-bold title" :href="`#tab-${3}`">3</v-tab>
+          <v-tab class="font-weight-bold title" :href="`#tab-${4}`">4</v-tab>-->
+          <v-tab class="font-weight-bold title" :href="`#tab-${1}`">热血/校园</v-tab>
+          <v-tab class="font-weight-bold title" :href="`#tab-${2}`">竞技/体育</v-tab>
+          <v-tab class="font-weight-bold title" :href="`#tab-${3}`">武侠/格斗</v-tab>
+          <v-tab class="font-weight-bold title" :href="`#tab-${4}`">爱情/治愈</v-tab>
         </v-tabs>
 
         <v-tabs-items v-model="model">
           <v-tab-item lazy :value="`tab-${1}`">
             <v-card flat>
               <v-card-text>
-                <!-- {{hLove}} -->
                 <!-- <v-container grid-list-md> -->
-                  <v-layout justify-center>
-                    <v-flex lg12 md12 xs12>
-                      <v-card>
-                        <!-- <v-card-title class="headline">热门连载</v-card-title> -->
-                        <v-layout row wrap>
-                          <v-flex
-                            lg3
-                            md3
-                            xs4
-                            v-for="item in hLove.slice(0,8)"
-                            :key="item.id"
-                            @click="toComic(item)"
-                          >
-                            <v-card class="indexComicImg">
-                              <v-img :src="item.bookImg" :aspect-ratio="3/4"></v-img>
-                              <v-card-text>
-                                <div
-                                  class="text-md-center text-lg-center text-xs-center text-truncate"
-                                >{{item.bookTitle}}</div>
-                              </v-card-text>
-                            </v-card>
-                          </v-flex>
-                        </v-layout>
-                      </v-card>
-                    </v-flex>
-                  </v-layout>
+                <v-layout justify-center>
+                  <v-flex lg12 md12 xs12>
+                    <v-card>
+                      <!-- <v-card-title class="headline">热门连载</v-card-title> -->
+                      <v-layout row wrap>
+                        <v-flex
+                          lg3
+                          md3
+                          sm3
+                          xs6
+                          v-for="item in hBlood.slice(0,8)"
+                          :key="item.id"
+                          @click="toComic(item)"
+                        >
+                          <v-card class="indexComicImg">
+                            <v-img :src="item.bookImg" :aspect-ratio="3/4"></v-img>
+                            <v-card-text>
+                              <div
+                                class="text-md-center text-lg-center text-xs-center text-truncate"
+                              >{{item.bookTitle}}</div>
+                            </v-card-text>
+                          </v-card>
+                        </v-flex>
+                      </v-layout>
+                    </v-card>
+                  </v-flex>
+                </v-layout>
                 <!-- </v-container> -->
               </v-card-text>
             </v-card>
@@ -49,25 +61,33 @@
             <v-card flat>
               <v-card-text>
                 <!-- <v-container grid-list-md> -->
-                  <v-layout justify-center>
-                    <v-flex lg12 md12 xs12>
-                      <v-card>
-                        <!-- <v-card-title class="headline">热门连载</v-card-title> -->
-                        <v-layout row wrap>
-                          <v-flex lg3 md3 xs4 v-for="item in hBlood.slice(0,8)" :key="item.id" @click="toComic(item)">
-                            <v-card class="indexComicImg">
-                              <v-img :src="item.bookImg" :aspect-ratio="3/4"></v-img>
-                              <v-card-text>
-                                <div
-                                  class="text-md-center text-lg-center text-xs-center text-truncate"
-                                >{{item.bookTitle}}</div>
-                              </v-card-text>
-                            </v-card>
-                          </v-flex>
-                        </v-layout>
-                      </v-card>
-                    </v-flex>
-                  </v-layout>
+                <v-layout justify-center>
+                  <v-flex lg12 md12 xs12>
+                    <v-card>
+                      <!-- <v-card-title class="headline">热门连载</v-card-title> -->
+                      <v-layout row wrap>
+                        <v-flex
+                          lg3
+                          md3
+                          sm3
+                          xs6
+                          v-for="item in hSport.slice(0,8)"
+                          :key="item.id"
+                          @click="toComic(item)"
+                        >
+                          <v-card class="indexComicImg">
+                            <v-img :src="item.bookImg" :aspect-ratio="3/4"></v-img>
+                            <v-card-text>
+                              <div
+                                class="text-md-center text-lg-center text-xs-center text-truncate"
+                              >{{item.bookTitle}}</div>
+                            </v-card-text>
+                          </v-card>
+                        </v-flex>
+                      </v-layout>
+                    </v-card>
+                  </v-flex>
+                </v-layout>
                 <!-- </v-container> -->
               </v-card-text>
             </v-card>
@@ -76,52 +96,70 @@
             <v-card flat>
               <v-card-text>
                 <!-- <v-container grid-list-md> -->
-                  <v-layout justify-center>
-                    <v-flex lg12 md12 xs12>
-                      <v-card>
-                        <!-- <v-card-title class="headline">热门连载</v-card-title> -->
-                        <v-layout row wrap>
-                          <v-flex lg3 md3 xs4 v-for="item in hSport.slice(0,8)" :key="item.id" @click="toComic(item)">
-                            <v-card class="indexComicImg">
-                              <v-img :src="item.bookImg" :aspect-ratio="3/4"></v-img>
-                              <v-card-text>
-                                <div
-                                  class="text-md-center text-lg-center text-xs-center text-truncate"
-                                >{{item.bookTitle}}</div>
-                              </v-card-text>
-                            </v-card>
-                          </v-flex>
-                        </v-layout>
-                      </v-card>
-                    </v-flex>
-                  </v-layout>
+                <v-layout justify-center>
+                  <v-flex lg12 md12 xs12>
+                    <v-card>
+                      <!-- <v-card-title class="headline">热门连载</v-card-title> -->
+                      <v-layout row wrap>
+                        <v-flex
+                          lg3
+                          md3
+                          sm3
+                          xs6
+                          v-for="item in hFight.slice(0,8)"
+                          :key="item.id"
+                          @click="toComic(item)"
+                        >
+                          <v-card class="indexComicImg">
+                            <v-img :src="item.bookImg" :aspect-ratio="3/4"></v-img>
+                            <v-card-text>
+                              <div
+                                class="text-md-center text-lg-center text-xs-center text-truncate"
+                              >{{item.bookTitle}}</div>
+                            </v-card-text>
+                          </v-card>
+                        </v-flex>
+                      </v-layout>
+                    </v-card>
+                  </v-flex>
+                </v-layout>
                 <!-- </v-container> -->
               </v-card-text>
             </v-card>
           </v-tab-item>
+
           <v-tab-item lazy :value="`tab-${4}`">
             <v-card flat>
               <v-card-text>
+                <!-- {{hLove}} -->
                 <!-- <v-container grid-list-md> -->
-                  <v-layout justify-center>
-                    <v-flex lg12 md12 xs12>
-                      <v-card>
-                        <!-- <v-card-title class="headline">热门连载</v-card-title> -->
-                        <v-layout row wrap>
-                          <v-flex lg3 md3 xs4 v-for="item in hFight.slice(0,8)" :key="item.id" @click="toComic(item)">
-                            <v-card class="indexComicImg">
-                              <v-img :src="item.bookImg" :aspect-ratio="3/4"></v-img>
-                              <v-card-text>
-                                <div
-                                  class="text-md-center text-lg-center text-xs-center text-truncate"
-                                >{{item.bookTitle}}</div>
-                              </v-card-text>
-                            </v-card>
-                          </v-flex>
-                        </v-layout>
-                      </v-card>
-                    </v-flex>
-                  </v-layout>
+                <v-layout justify-center>
+                  <v-flex lg12 md12 xs12>
+                    <v-card>
+                      <!-- <v-card-title class="headline">热门连载</v-card-title> -->
+                      <v-layout row wrap>
+                        <v-flex
+                          lg3
+                          md3
+                          sm3
+                          xs6
+                          v-for="item in hLove.slice(0,8)"
+                          :key="item.id"
+                          @click="toComic(item)"
+                        >
+                          <v-card class="indexComicImg">
+                            <v-img :src="item.bookImg" :aspect-ratio="3/4"></v-img>
+                            <v-card-text>
+                              <div
+                                class="text-md-center text-lg-center text-xs-center text-truncate"
+                              >{{item.bookTitle}}</div>
+                            </v-card-text>
+                          </v-card>
+                        </v-flex>
+                      </v-layout>
+                    </v-card>
+                  </v-flex>
+                </v-layout>
                 <!-- </v-container> -->
               </v-card-text>
             </v-card>
