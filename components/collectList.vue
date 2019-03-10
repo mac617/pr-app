@@ -9,7 +9,7 @@
     />-->
     <v-layout justify-center ma-0>
       <v-flex lg12>
-        <v-container fluid grid-list-lg>
+        <v-container fluid grid-list-lg pa-0>
           <v-layout row wrap :justify-center="$vuetify.breakpoint.smOnly">
             <v-flex
               lg6
