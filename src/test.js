@@ -1,1 +1,12 @@
-57漫画网为非赢利性质的公益网站。所有漫画均来自网络，本站转载旨在宣传和推广优秀的漫画作品，以便漫画爱好者研究漫画技巧和构图方式。若喜欢，请购买正版书籍以支持作者！
+function a(x,y){
+    this.x = x;
+    this.y =y;
+}
+
+a.prototype.toString = function() {
+    return '(' + this.x + ',' + this.y + ')';
+}
+
+let newb = new a(2,3)
+
+console.log(newb.toString())

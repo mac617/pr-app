@@ -33,7 +33,7 @@
     </v-layout>-->
     <v-layout justify-center ma-0>
       <v-flex>
-        <v-container fluid grid-list-lg>
+        <v-container fluid grid-list-lg pa-0>
           <v-layout row wrap :justify-center="$vuetify.breakpoint.smOnly">
             <v-flex lg6 md6 sm8 xs12 v-for="item in history" :key="item.id">
               <v-card>
