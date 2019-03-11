@@ -109,7 +109,7 @@ export default {
       );
     },
     bookIntro() {
-      return this.$store.state.comicDetail.bookIntro;
+      return this.$store.state.comicDetail.bookIntro || '';
     }
   },
   async created() {

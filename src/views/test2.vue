@@ -1,36 +1,47 @@
 <template>
-  <v-layout>
-    <v-flex xs12 sm6 offset-sm3>
-      <v-card>
-        <v-container grid-list-sm fluid>
-          <v-layout row wrap>
-            <v-flex
-            >
-              <v-card flat tile class="d-flex">
-                <v-img
-                  :src="`https://picsum.photos/500/300?image=${1 * 5 + 10}`"
-                  :lazy-src="`https://picsum.photos/10/6?image=${1 * 5 + 10}`"
-                  aspect-ratio="1"
-                  class="grey lighten-2"
-                >
-                  <template v-slot:placeholder>
-                    <v-layout
-                      fill-height
-                      align-center
-                      justify-center
-                      ma-0
-                    >
-                      <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                    </v-layout>
-                  </template>
-                </v-img>
-              </v-card>
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </v-card>
-    </v-flex>
-  </v-layout>
+  <v-hover>
+    <v-card
+      slot-scope="{ hover }"
+      :class="`elevation-${hover ? 12 : 2}`"
+      class="mx-auto"
+      width="344"
+    >
+      <v-img
+        :aspect-ratio="16/9"
+        src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+      ></v-img>
+      <v-card-title>
+        <div>
+          <span class="headline">Cafe Badilico</span>
+          <div class="d-flex">
+            <v-rating
+              :value="value"
+              color="amber"
+              dense
+              half-increments
+              readonly
+              size="14"
+            ></v-rating>
+            <div class="ml-2 grey--text text--darken-2">
+              <span>{{ value }}</span>
+              <span>({{ reviews }})</span>
+            </div>
+          </div>
+        </div>
+        <v-spacer></v-spacer>
+        <v-btn icon class="mr-0">
+          <v-icon>mdi-chevron-right</v-icon>
+        </v-btn>
+      </v-card-title>
+    </v-card>
+  </v-hover>
 </template>
 
-// 57漫画网为非赢利性质的公益网站。所有漫画均来自网络，本站转载旨在宣传和推广优秀的漫画作品，以便漫画爱好者研究漫画技巧和构图方式。若喜欢，请购买正版书籍以支持作者！
+<script>
+  export default {
+    data: () => ({
+      reviews: 413,
+      value: 4.5
+    })
+  }
+</script>
