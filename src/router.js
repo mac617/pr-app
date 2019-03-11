@@ -13,7 +13,7 @@ import DevLop from "./views/devLog.vue";
 import About from "./views/about.vue";
 import notFound from "./views/notFound.vue";
 export default {
-  // mode: "history",
+  mode: "history",
   routes: [
     {
       path: "/",
@@ -59,11 +59,11 @@ export default {
       path: "/about",
       component: About
     },
-    { path: "*", component: notFound },
-    {
-      path: "/test2",
-      component: Test2
-    },
+    { path: "*", component: notFound }
+    // {
+    //   path: "/test2",
+    //   component: Test2
+    // },
     // {
     //   path: "/test3",
     //   component: Test3
