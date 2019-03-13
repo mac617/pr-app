@@ -64,6 +64,7 @@
                         </div>
                     </v-card-title>-->
                   </v-flex>
+                  
                 </v-layout>
                 <v-divider light></v-divider>
                 <v-card-actions class="pa-3">
@@ -82,6 +83,7 @@
                 </v-card-actions>
               </v-card>
             </v-flex>
+            <v-flex v-if="!history"><center class="subheading"><strong>这里什么都没有</strong></center></v-flex>
             <!-- <v-spacer></v-spacer> -->
           </v-layout>
         </v-container>

@@ -18,6 +18,7 @@
                 <v-container grid-list-md text-xs-center>
                   <v-layout row wrap>
                     <v-flex v-for="(item,index) in chapterPageItem(v)" :key="index" xs4>
+                      <a>
                       <v-card dark>
                         <v-card-text class="px-0" @click.stop="toComicView(item,index+(v-1)*100)">
                           <div class="text-truncate">
@@ -25,6 +26,7 @@
                           </div>
                         </v-card-text>
                       </v-card>
+                      </a>
                     </v-flex>
                   </v-layout>
                 </v-container>

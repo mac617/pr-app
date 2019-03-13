@@ -178,18 +178,18 @@ export default {
         {
           text: "首页",
           disabled: false,
-          href: "/#/"
+          href: "/"
         },
         {
           text: this.lazyNextNum,
           disabled: false,
-          href: "/#/comic/" + this.$route.params.comicNo
+          href: "/comic/" + this.$route.params.comicNo
         },
         {
           text: this.chapterName,
           disabled: true,
           href:
-            "/#/comicview" +
+            "/comicview" +
             this.$route.params.comicNo +
             this.$route.params.chapterNo
         }

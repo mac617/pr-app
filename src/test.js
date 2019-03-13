@@ -1,5 +1,3 @@
-function test(numb) {
-  console.log(numb)
-}
-
-module.exports = test
+function fn(){}
+  
+console.log(fn)

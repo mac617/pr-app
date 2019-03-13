@@ -19,6 +19,7 @@
               v-for="item in collectList"
               :key="item.id"
               @click="toComic(item)"
+              
             >
               <v-card>
                 <v-layout>
@@ -45,6 +46,7 @@
                 <v-divider light></v-divider>
               </v-card>
             </v-flex>
+            <v-flex v-if="!collectList"><center class="subheading"><strong>这里什么都没有......</strong></center></v-flex>
             <!-- <v-spacer></v-spacer> -->
           </v-layout>
         </v-container>
